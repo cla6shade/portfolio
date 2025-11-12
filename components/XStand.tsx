@@ -8,7 +8,7 @@ interface XStandProps {
 export default function XStand({ width, yPosition }: XStandProps) {
   const legWidth = width * 0.7;
   const legHeight = 4;
-  const legLength = 4;
+  const legLength = 5.2;
   const angle = Math.atan2(legHeight, legWidth);
 
   return (
