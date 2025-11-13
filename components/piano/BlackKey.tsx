@@ -3,7 +3,13 @@
 import { useState } from 'react';
 import { ThreeEvent } from '@react-three/fiber';
 import { Edges } from '@react-three/drei';
-import { BLACK_KEY_WIDTH, BLACK_KEY_HEIGHT, BLACK_KEY_LENGTH, WHITE_KEY_HEIGHT, WHITE_KEY_LENGTH } from './constants';
+import {
+  BLACK_KEY_WIDTH,
+  BLACK_KEY_HEIGHT,
+  BLACK_KEY_LENGTH,
+  WHITE_KEY_HEIGHT,
+  WHITE_KEY_LENGTH,
+} from './constants';
 
 interface BlackKeyProps {
   keyIndex: number;
@@ -14,14 +20,10 @@ interface BlackKeyProps {
 
 function calculateKeyPosition(
   basePosition: [number, number, number],
-  pressed: boolean
+  pressed: boolean,
 ): [number, number, number] {
   const pressDepth = 0.015;
-  return [
-    basePosition[0],
-    basePosition[1] - (pressed ? pressDepth : 0),
-    basePosition[2]
-  ];
+  return [basePosition[0], basePosition[1] - (pressed ? pressDepth : 0), basePosition[2]];
 }
 
 function handleKeyPointerDown(
@@ -29,7 +31,7 @@ function handleKeyPointerDown(
   keyIndex: number,
   isPianoFocused: boolean,
   onKeyPress: (keyIndex: number, isBlack: boolean) => void,
-  setPressed: (pressed: boolean) => void
+  setPressed: (pressed: boolean) => void,
 ) {
   if (!isPianoFocused) return;
   e.stopPropagation();
@@ -49,13 +51,13 @@ export default function BlackKey({
   keyIndex,
   blackKeyX,
   onKeyPress,
-  isPianoFocused
+  isPianoFocused,
 }: BlackKeyProps) {
   const [pressed, setPressed] = useState(false);
   const basePosition: [number, number, number] = [
     blackKeyX,
     BLACK_KEY_HEIGHT / 2 + WHITE_KEY_HEIGHT,
-    -WHITE_KEY_LENGTH / 2 + BLACK_KEY_LENGTH / 2
+    -WHITE_KEY_LENGTH / 2 + BLACK_KEY_LENGTH / 2,
   ];
   const position = calculateKeyPosition(basePosition, pressed);
 
@@ -64,7 +66,9 @@ export default function BlackKey({
       position={position}
       castShadow
       receiveShadow
-      onPointerDown={(e) => handleKeyPointerDown(e, keyIndex, isPianoFocused, onKeyPress, setPressed)}
+      onPointerDown={(e) =>
+        handleKeyPointerDown(e, keyIndex, isPianoFocused, onKeyPress, setPressed)
+      }
       onPointerUp={() => handleKeyPointerUp(setPressed)}
       onPointerLeave={() => handleKeyPointerLeave(setPressed)}
     >

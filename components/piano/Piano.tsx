@@ -4,17 +4,15 @@ import PianoModel from '@/components/piano/PianoModel';
 
 export type PianoProps = {
   isSoundEnabled: boolean;
-}
+};
 export default function Piano({ isSoundEnabled }: PianoProps) {
-  return (
-    isSoundEnabled ? (
-      <Suspense fallback={<PianoModel />}>
-        <SoundBoundPiano />
-      </Suspense>
-    ) : (
-      <PianoModel />
-    )
-  )
+  return isSoundEnabled ? (
+    <Suspense fallback={<PianoModel />}>
+      <SoundBoundPiano />
+    </Suspense>
+  ) : (
+    <PianoModel />
+  );
 }
 
 function SoundBoundPiano() {

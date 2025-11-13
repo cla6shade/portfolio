@@ -6,12 +6,12 @@ export default function Floor() {
   // 여러 텍스쳐 맵을 한번에 로드
   // useTexture는 객체로 전달하면 각 텍스쳐를 키-값 쌍으로 반환
   const { diffuse, normal, roughness } = useTexture({
-    diffuse: '/floor/wood_shutter_diff_1k.webp',      // 기본 색상과 나무 무늬
-    normal: '/floor/wood_shutter_nor_gl_1k.webp',        // 나무 결의 입체감 (Normal GL 포맷)
-    roughness: '/floor/wood_shutter_rough_1k.webp',  // 표면 거칠기 (밝을수록 거칠고, 어두울수록 반짝임)
+    diffuse: '/floor/wood_shutter_diff_1k.webp', // 기본 색상과 나무 무늬
+    normal: '/floor/wood_shutter_nor_gl_1k.webp', // 나무 결의 입체감 (Normal GL 포맷)
+    roughness: '/floor/wood_shutter_rough_1k.webp', // 표면 거칠기 (밝을수록 거칠고, 어두울수록 반짝임)
   });
 
-  const [width, height] = [80, 40];  // 바닥 크기를 더 크게 확장
+  const [width, height] = [80, 40]; // 바닥 크기를 더 크게 확장
   const repeatScale = 5;
   const [hRepeat, vRepeat] = [width / repeatScale, height / repeatScale];
 

@@ -14,14 +14,10 @@ interface WhiteKeyProps {
 
 function calculateKeyPosition(
   basePosition: [number, number, number],
-  pressed: boolean
+  pressed: boolean,
 ): [number, number, number] {
   const pressDepth = 0.02;
-  return [
-    basePosition[0],
-    basePosition[1] - (pressed ? pressDepth : 0),
-    basePosition[2]
-  ];
+  return [basePosition[0], basePosition[1] - (pressed ? pressDepth : 0), basePosition[2]];
 }
 
 function handleKeyPointerDown(
@@ -29,7 +25,7 @@ function handleKeyPointerDown(
   keyIndex: number,
   isPianoFocused: boolean,
   onKeyPress: (keyIndex: number, isBlack: boolean) => void,
-  setPressed: (pressed: boolean) => void
+  setPressed: (pressed: boolean) => void,
 ) {
   if (!isPianoFocused) return;
   e.stopPropagation();
@@ -45,12 +41,7 @@ function handleKeyPointerLeave(setPressed: (pressed: boolean) => void) {
   setPressed(false);
 }
 
-export default function WhiteKey({
-  keyIndex,
-  xOffset,
-  onKeyPress,
-  isPianoFocused
-}: WhiteKeyProps) {
+export default function WhiteKey({ keyIndex, xOffset, onKeyPress, isPianoFocused }: WhiteKeyProps) {
   const [pressed, setPressed] = useState(false);
   const basePosition: [number, number, number] = [xOffset, WHITE_KEY_HEIGHT / 2, 0];
   const position = calculateKeyPosition(basePosition, pressed);
@@ -60,7 +51,9 @@ export default function WhiteKey({
       position={position}
       castShadow
       receiveShadow
-      onPointerDown={(e) => handleKeyPointerDown(e, keyIndex, isPianoFocused, onKeyPress, setPressed)}
+      onPointerDown={(e) =>
+        handleKeyPointerDown(e, keyIndex, isPianoFocused, onKeyPress, setPressed)
+      }
       onPointerUp={() => handleKeyPointerUp(setPressed)}
       onPointerLeave={() => handleKeyPointerLeave(setPressed)}
     >

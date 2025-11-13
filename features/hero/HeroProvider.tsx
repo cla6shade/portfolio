@@ -9,7 +9,7 @@ export type THeroContext = {
   setIsAnimating: (animating: boolean) => void;
   focusPiano: () => void;
   unfocusPiano: () => void;
-}
+};
 
 const initialCameraPos = new Vector3(-0.68, 9.19, 14.46);
 const initialLookAt = new Vector3(0, 0, 0);
@@ -21,12 +21,12 @@ export const HeroContext = createContext<THeroContext>({
   isAnimating: false,
   setIsAnimating: () => {},
   focusPiano: () => {},
-  unfocusPiano: () => {}
+  unfocusPiano: () => {},
 });
 
 export type HeroContextProps = {
   children: ReactNode;
-}
+};
 
 export function HeroContextProvider({ children }: HeroContextProps) {
   const [isPianoFocused, setIsPianoFocused] = useState(false);
@@ -45,7 +45,7 @@ export function HeroContextProvider({ children }: HeroContextProps) {
     const cameraPos = new Vector3(
       pianoCenter.x + Math.sin(pianoRotation) * distance,
       pianoCenter.y + height,
-      pianoCenter.z + Math.cos(pianoRotation) * distance
+      pianoCenter.z + Math.cos(pianoRotation) * distance,
     );
 
     setCameraTarget(cameraPos);
@@ -61,18 +61,20 @@ export function HeroContextProvider({ children }: HeroContextProps) {
   };
 
   return (
-    <HeroContext.Provider value={{
-      isPianoFocused,
-      cameraTarget,
-      lookAtTarget,
-      isAnimating,
-      setIsAnimating,
-      focusPiano,
-      unfocusPiano
-    }}>
+    <HeroContext.Provider
+      value={{
+        isPianoFocused,
+        cameraTarget,
+        lookAtTarget,
+        isAnimating,
+        setIsAnimating,
+        focusPiano,
+        unfocusPiano,
+      }}
+    >
       {children}
     </HeroContext.Provider>
-  )
+  );
 }
 
 export function useHero() {

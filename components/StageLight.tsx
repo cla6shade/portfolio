@@ -23,8 +23,7 @@ export default function StageLight({ position, target }: StageLightProps) {
   useFrame((_, delta) => {
     const intensityLimit = 3000;
     const durationSec = 1.0;
-    if(!spotLightRef.current || timeRef.current >= durationSec)
-      return;
+    if (!spotLightRef.current || timeRef.current >= durationSec) return;
     timeRef.current += delta;
     const t = Math.min(timeRef.current / durationSec, 1);
     const eased = easeOutQuad(t);
