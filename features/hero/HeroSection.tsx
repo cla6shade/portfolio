@@ -15,9 +15,9 @@ function HeroContent() {
   return (
     <main className="w-dvw max-h-dvh aspect-video relative">
       {!isPianoFocused && (
-        <div className="absolute w-1/2 h-full flex justify-center items-end px-10 flex-col z-10 transition-opacity duration-300">
+        <div className="absolute w-1/2 h-full flex justify-center items-end px-20 flex-col z-10 transition-opacity duration-300">
           <h1 className="text-6xl font-bold">CLA6SHADE</h1>
-          <div className="text-sm text-end mt-6 mb-10 gap-1 flex flex-col">
+          <div className="text-lg text-end mt-6 mb-10 gap-1 flex flex-col">
             <p>음악과 성취를 좋아하는 개발자입니다</p>
             <p>주로 Next.js, React, Node.js를 이용한 풀스택 애플리케이션을 개발합니다</p>
             <p>기획에 한계를 두지 않고 구현하는 것을 즐깁니다</p>
