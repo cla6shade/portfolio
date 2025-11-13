@@ -1,25 +1,9 @@
-# Dependencies
-node_modules/
-package-lock.json
-yarn.lock
+!*.ts
+!*.tsx
 
-# Build outputs
+node_modules/
 dist/
 build/
 out/
 .next/
-
-# Coverage
 coverage/
-
-# Environment
-.env
-.env.local
-.env.*.local
-
-# Cache
-.cache/
-.parcel-cache/
-
-# Logs
-*.log
