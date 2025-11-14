@@ -2,7 +2,7 @@
 
 import { HeroContextProvider, useHero } from '@/features/hero/HeroProvider';
 import { Button } from '@/components/ui/button';
-import Scene from '@/components/Scene';
+import Scene from '@/features/hero/scene/Scene';
 import { MoveDown, Undo2 } from 'lucide-react';
 
 function HeroContent() {

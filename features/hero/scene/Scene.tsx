@@ -1,11 +1,11 @@
 'use client';
 
 import { Canvas, ThreeEvent } from '@react-three/fiber';
-import Floor from '@/components/Floor';
-import StageLight from '@/components/StageLight';
+import Floor from '@/features/hero/scene/Floor';
+import StageLight from '@/features/hero/scene/StageLight';
 import { useHero } from '@/features/hero/HeroProvider';
-import CameraController from '@/components/scene/CameraController';
-import Piano from '@/components/piano/Piano';
+import CameraController from '@/features/hero/scene/CameraController';
+import Piano from '@/features/hero/piano/Piano';
 
 export default function Scene() {
   const { isPianoFocused, cameraTarget, lookAtTarget, isAnimating, setIsAnimating, focusPiano } =

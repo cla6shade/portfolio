@@ -1,6 +1,6 @@
 import { Suspense, use, useMemo } from 'react';
-import { loadPiano } from '@/components/piano/pianoSound';
-import PianoModel from '@/components/piano/PianoModel';
+import { loadPiano } from '@/features/hero/piano/pianoSound';
+import PianoModel from '@/features/hero/piano/PianoModel';
 
 export type PianoProps = {
   isSoundEnabled: boolean;
