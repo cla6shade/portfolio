@@ -36,7 +36,7 @@ export default function Scene() {
             setIsAnimating={setIsAnimating}
           />
           <ambientLight intensity={0.1} />
-          <StageLight position={[8, 13, 1]} target={[8, 4, 1]} />
+          <StageLight position={[8, 13, 0]} target={[8, 4, 0]} />
           <Floor />
           <group onClick={handleGroupClick}>
             <Piano isSoundEnabled={isSoundEnabled} />
