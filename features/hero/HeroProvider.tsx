@@ -1,5 +1,6 @@
 import { createContext, ReactNode, use, useState } from 'react';
 import { Vector3 } from 'three';
+import { PIANO_POSITION, PIANO_ROTATION } from '@/features/hero/piano/constants';
 
 export type THeroContext = {
   isPianoFocused: boolean;
@@ -37,15 +38,15 @@ export function HeroContextProvider({ children }: HeroContextProps) {
   const focusPiano = () => {
     setIsPianoFocused(true);
 
-    const pianoCenter = new Vector3(8, 4, 2);
-    const pianoRotation = -Math.PI / 3;
+    const pianoCenter = new Vector3(...PIANO_POSITION);
+    const pianoRotationY = PIANO_ROTATION[1];
 
     const distance = 4;
     const height = 3;
     const cameraPos = new Vector3(
-      pianoCenter.x + Math.sin(pianoRotation) * distance,
+      pianoCenter.x + Math.sin(pianoRotationY) * distance,
       pianoCenter.y + height,
-      pianoCenter.z + Math.cos(pianoRotation) * distance,
+      pianoCenter.z + Math.cos(pianoRotationY) * distance,
     );
 
     setCameraTarget(cameraPos);

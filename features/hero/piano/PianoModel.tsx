@@ -8,6 +8,8 @@ import {
   CASE_WIDTH,
   CASE_LENGTH,
   PIANO_WIDTH,
+  PIANO_POSITION,
+  PIANO_ROTATION,
 } from './constants';
 import { playPianoNote, Player } from './pianoSound';
 import PianoKey from '@/features/hero/piano/PianoKey';
@@ -20,8 +22,8 @@ interface PianoProps {
 }
 
 export default function PianoModel({
-  offset = [8, 4, 2],
-  rotation = [0, -Math.PI / 3, 0],
+  offset = PIANO_POSITION,
+  rotation = PIANO_ROTATION,
   player = null,
 }: PianoProps) {
   return (
