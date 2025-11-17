@@ -1,11 +1,15 @@
 import type { Metadata } from 'next';
-import { Noto_Sans } from 'next/font/google';
+import { Noto_Sans, Playwrite_US_Trad } from 'next/font/google';
 import './globals.css';
 import { ReactNode } from 'react';
-
+import Navigation from '@/components/Navigation';
 const notoSans = Noto_Sans({
   variable: '--font-noto-sans',
   subsets: ['latin'],
+});
+
+const playWrite = Playwrite_US_Trad({
+  variable: '--font-playwrite',
 });
 
 export const metadata: Metadata = {
@@ -20,7 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="dark">
-      <body className={`${notoSans.variable} antialiased`}>{children}</body>
+      <body className={`${notoSans.variable} ${playWrite.variable} antialiased`}>
+        <Navigation />
+        {children}
+      </body>
     </html>
   );
 }
