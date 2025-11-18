@@ -7,9 +7,17 @@ import { useHero } from '@/features/hero/HeroProvider';
 import CameraController from '@/features/hero/scene/CameraController';
 import Piano from '@/features/hero/piano/Piano';
 
+import { useRef } from 'react';
+import { usePianoBoundingBox } from '@/features/hero/scene/usePianoBoundingBox';
+import { INITIAL_CAMERA_FOV, INITIAL_CAMERA_POSITION } from '@/features/hero/piano/constants';
+
 export default function Scene() {
   const { isPianoFocused, cameraTarget, lookAtTarget, isAnimating, setIsAnimating, focusPiano } =
     useHero();
+  const boundingBoxRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLDivElement>(null);
+
+  usePianoBoundingBox({ boundingBoxRef, canvasRef });
 
   const handleGroupClick = (e: ThreeEvent<MouseEvent>) => {
     if (!isPianoFocused) {
@@ -21,11 +29,11 @@ export default function Scene() {
   const isSoundEnabled = isPianoFocused && !isAnimating;
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="w-full max-h-full aspect-video">
+      <div ref={canvasRef} className="w-full max-h-full aspect-video relative">
         <Canvas
           camera={{
-            fov: 75,
-            position: [-0.68, 9.19, 14.46],
+            fov: INITIAL_CAMERA_FOV,
+            position: INITIAL_CAMERA_POSITION,
           }}
           shadows
         >
@@ -35,13 +43,15 @@ export default function Scene() {
             isAnimating={isAnimating}
             setIsAnimating={setIsAnimating}
           />
-          <ambientLight intensity={0.1} />
           <StageLight position={[8, 13, 0]} target={[8, 4, 0]} />
           <Floor />
           <group onClick={handleGroupClick}>
             <Piano isSoundEnabled={isSoundEnabled} />
           </group>
         </Canvas>
+        <div ref={boundingBoxRef} className="absolute border hidden justify-center">
+          Click me
+        </div>
       </div>
     </div>
   );

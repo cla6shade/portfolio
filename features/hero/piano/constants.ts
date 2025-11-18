@@ -26,3 +26,6 @@ export const blackKeyPattern = [1, 3, 6, 8, 10]; // C#, D#, F#, G#, A#
 export const PIANO_POSITION: [number, number, number] = [8, 4, 1];
 export const PIANO_ROTATION: [number, number, number] = [0, -Math.PI / 3, 0];
 export const PIANO_SIZE: [number, number, number] = [CASE_WIDTH, 0.3, CASE_LENGTH];
+
+export const INITIAL_CAMERA_POSITION: [number, number, number] = [-0.68, 9.19, 14.46];
+export const INITIAL_CAMERA_FOV = 75;
