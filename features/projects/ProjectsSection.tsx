@@ -80,7 +80,7 @@ export default function ProjectsSection() {
           <div className="flex-1 relative h-[400px]">
             <CardSwap
               width={500}
-              height={400}
+              height={300}
               cardDistance={60}
               verticalDistance={70}
               delay={5000}
