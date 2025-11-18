@@ -14,7 +14,7 @@ function HeroContent() {
   };
 
   return (
-    <main className="w-dvw max-h-dvh aspect-video relative">
+    <main className="w-full max-h-dvh aspect-video relative">
       {!isPianoFocused && <HeroTextSection />}
 
       <Scene />
