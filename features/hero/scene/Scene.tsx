@@ -8,16 +8,12 @@ import CameraController from '@/features/hero/scene/CameraController';
 import Piano from '@/features/hero/piano/Piano';
 
 import { useRef } from 'react';
-import { usePianoBoundingBox } from '@/features/hero/scene/usePianoBoundingBox';
 import { INITIAL_CAMERA_FOV, INITIAL_CAMERA_POSITION } from '@/features/hero/piano/constants';
 
 export default function Scene() {
   const { isPianoFocused, cameraTarget, lookAtTarget, isAnimating, setIsAnimating, focusPiano } =
     useHero();
-  const boundingBoxRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
-
-  usePianoBoundingBox({ boundingBoxRef, canvasRef });
 
   const handleGroupClick = (e: ThreeEvent<MouseEvent>) => {
     if (!isPianoFocused) {
@@ -49,9 +45,6 @@ export default function Scene() {
             <Piano isSoundEnabled={isSoundEnabled} />
           </group>
         </Canvas>
-        <div ref={boundingBoxRef} className="absolute border hidden justify-center">
-          Click me
-        </div>
       </div>
     </div>
   );
