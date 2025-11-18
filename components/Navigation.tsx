@@ -1,9 +1,11 @@
 'use client';
 
+import DefaultPad from '@/components/DefaultPad';
+
 export default function Navigation() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 w-full">
-      <div className="px-20 lg:px-30 xl:px-40 py-4 shadow-lg">
+      <DefaultPad className="py-4 shadow-lg">
         <div className="flex items-center justify-between">
           <div className="text-xl font-playwrite font-thin">Cla6shade</div>
           <div className="flex gap-8 items-center">
@@ -18,7 +20,7 @@ export default function Navigation() {
             </a>
           </div>
         </div>
-      </div>
+      </DefaultPad>
     </nav>
   );
 }
