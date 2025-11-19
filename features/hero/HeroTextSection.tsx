@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 
 export default function HeroTextSection() {
   return (
-    <div className="absolute w-1/2 h-full flex justify-center pb-10 items-end px-20 flex-col z-10">
+    <div className="absolute w-1/2 h-full flex justify-center pb-10 items-end px-16 flex-col z-10">
       <h1 className="text-6xl font-bold opacity-0 animate-fade-in-slide">CLA6SHADE</h1>
       <div className="text-lg font-thin text-end mt-6 mb-10 gap-1 flex flex-col opacity-0 animate-fade-in-slide delay-200">
         <p>음악과 성취를 좋아하는 개발자입니다</p>
