@@ -24,8 +24,8 @@ export default function ProjectCard({
       className={`absolute top-1/2 left-1/2 rounded-xl border border-white/20 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md [transform-style:preserve-3d] [will-change:transform] [backface-visibility:hidden] p-8 flex flex-col justify-between ${rest.className ?? ''}`}
     >
       <div>
-        <h3 className="text-3xl font-bold text-white mb-4">{title}</h3>
-        <p className="text-white/70 text-lg font-light leading-relaxed mb-6">{description}</p>
+        <h3 className="text-xl font-bold text-white mb-4">{title}</h3>
+        <p className="text-white/70 text-sm font-light leading-relaxed mb-6">{description}</p>
 
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
