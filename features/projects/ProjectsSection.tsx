@@ -12,6 +12,7 @@ const projects = [
     description: '자영업자를 위한 지원사업 안내 및 신청 보조',
     tags: ['Next.js', 'TypeScript', 'MongoDB'],
     link: 'https://test.exitmate.kr',
+    github: 'https://github.com/exitmate/web/tree/develop',
     details: [
       '자영업자의 폐업 문제 해결을 위해 지원사업 정책을 모아 보여주고 AI 비서를 통한 개인화 서비스 제공',
       '백엔드 100%, 프론트엔드 20% 기여',
@@ -24,6 +25,7 @@ const projects = [
     description: '위치·시간 기반으로 감정을 기록하고 공유하는 앱',
     tags: ['React', 'Express.js', 'TypeScript', 'Redis', 'MySQL'],
     link: 'https://apps.apple.com/kr/app/%EB%B0%98%EC%A7%9D%EC%9D%B4%EB%A7%B5/id6745518783',
+    github: 'https://github.com/banjjakme/glitters-be',
     details: [
       'HTTP API 개발, Redis Pub/Sub과 WebSocket 기반 채팅 구현',
       'Docker와 Github workflow를 이용한 Auto CI/CD 구축',
@@ -60,21 +62,24 @@ const projects = [
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState(0);
 
-  const handleCardClick = (idx: number) => {
+  const handleCardSwap = (idx: number) => {
     setSelectedProject(idx);
   };
 
   return (
     <section className="min-h-200 bg-black pt-24 relative overflow-hidden">
       <DefaultPad>
-        <h2 className="text-6xl font-bold text-white mb-12 opacity-0 animate-fade-in-slide">
+        <h2 className="text-4xl font-bold text-white mb-12 opacity-0 animate-fade-in-slide">
           PROJECTS
         </h2>
 
         <div className="flex gap-12 items-start">
           {/* Left side - Project details */}
           <div className="flex-1">
-            <ProjectDetail project={projects[selectedProject]} />
+            <ProjectDetail
+              key={`selected-project-${selectedProject}`}
+              project={projects[selectedProject]}
+            />
           </div>
 
           <div className="flex-1 relative h-[400px]">
@@ -84,7 +89,8 @@ export default function ProjectsSection() {
               cardDistance={60}
               verticalDistance={70}
               delay={5000}
-              onCardClick={handleCardClick}
+              onCardClick={handleCardSwap}
+              onSwapStart={handleCardSwap}
               easing="elastic"
             >
               {projects.map((project) => (
