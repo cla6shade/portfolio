@@ -20,7 +20,8 @@ export interface CardSwapProps {
   delay?: number;
   pauseOnHover?: boolean;
   onCardClick?: (idx: number) => void;
-  onSwap?: (newFrontIdx: number) => void;
+  onSwapStart?: (targetIdx: number) => void;
+  onSwapComplete?: (frontIdx: number) => void;
   skewAmount?: number;
   easing?: 'linear' | 'elastic';
   children: ReactNode;
@@ -75,7 +76,8 @@ const CardSwap: React.FC<CardSwapProps> = ({
   delay = 5000,
   pauseOnHover = false,
   onCardClick,
-  onSwap,
+  onSwapStart,
+  onSwapComplete,
   skewAmount = 6,
   easing = 'elastic',
   children,
@@ -103,8 +105,8 @@ const CardSwap: React.FC<CardSwapProps> = ({
     () => Children.toArray(children) as ReactElement<CardProps>[],
     [children],
   );
-  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const refs = useMemo<CardRef[]>(
+    // eslint-disable-next-line react-hooks/preserve-manual-memoization
     () => childArr.map(() => React.createRef<HTMLDivElement>()),
     [childArr.length],
   );
@@ -128,6 +130,8 @@ const CardSwap: React.FC<CardSwapProps> = ({
       const elFront = refs[front].current!;
       const tl = gsap.timeline();
       tlRef.current = tl;
+
+      onSwapStart?.(rest[0]);
 
       tl.to(elFront, {
         y: '+=500',
@@ -176,7 +180,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
 
       tl.call(() => {
         order.current = [...rest, front];
-        onSwap?.(rest[0]);
+        onSwapComplete?.(order.current[0]);
       });
     };
 
