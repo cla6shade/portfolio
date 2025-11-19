@@ -1,0 +1,46 @@
+<svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="glitters-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F172A;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1E293B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#334155;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="star-glow">
+      <stop offset="0%" style="stop-color:#FBBF24;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#FBBF24;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="300" fill="url(#glitters-grad)"/>
+
+  <!-- Stars with glow -->
+  <g>
+    <!-- Star 1 -->
+    <circle cx="100" cy="80" r="20" fill="url(#star-glow)" opacity="0.6"/>
+    <path d="M 100 70 L 103 82 L 115 82 L 106 89 L 109 101 L 100 94 L 91 101 L 94 89 L 85 82 L 97 82 Z" fill="#FCD34D"/>
+
+    <!-- Star 2 -->
+    <circle cx="380" cy="100" r="15" fill="url(#star-glow)" opacity="0.5"/>
+    <path d="M 380 92 L 382 100 L 390 100 L 384 105 L 386 113 L 380 108 L 374 113 L 376 105 L 370 100 L 378 100 Z" fill="#FCD34D"/>
+
+    <!-- Star 3 -->
+    <circle cx="150" cy="220" r="12" fill="url(#star-glow)" opacity="0.4"/>
+    <path d="M 150 213 L 151.5 219 L 157.5 219 L 153 222.5 L 154.5 228.5 L 150 225 L 145.5 228.5 L 147 222.5 L 142.5 219 L 148.5 219 Z" fill="#FCD34D"/>
+
+    <!-- Small sparkles -->
+    <circle cx="450" cy="50" r="2" fill="#FCD34D" opacity="0.8"/>
+    <circle cx="50" cy="250" r="2" fill="#FCD34D" opacity="0.8"/>
+    <circle cx="300" cy="40" r="2" fill="#FCD34D" opacity="0.8"/>
+    <circle cx="420" cy="260" r="2" fill="#FCD34D" opacity="0.8"/>
+  </g>
+
+  <!-- Map pin in center -->
+  <g transform="translate(220, 100)">
+    <ellipse cx="30" cy="85" rx="20" ry="5" fill="#000000" opacity="0.2"/>
+    <path d="M 30 20 C 15 20 5 30 5 45 C 5 65 30 80 30 80 C 30 80 55 65 55 45 C 55 30 45 20 30 20 Z"
+          fill="#EC4899" stroke="#F9A8D4" stroke-width="2"/>
+    <circle cx="30" cy="42" r="10" fill="white" opacity="0.9"/>
+    <circle cx="30" cy="42" r="6" fill="#EC4899"/>
+  </g>
+</svg>
