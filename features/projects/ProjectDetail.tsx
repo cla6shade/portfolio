@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 
 interface Project {
   title: string;
@@ -14,25 +14,10 @@ interface ProjectDetailProps {
 }
 
 export default function ProjectDetail({ project }: ProjectDetailProps) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(false);
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 50);
-
-    return () => clearTimeout(timer);
-  }, [project]);
-
   return (
-    <div
-      className={`transition-all duration-700 ease-out ${
-        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-      }`}
-    >
-      <h3 className="text-4xl font-bold text-white mb-6">{project.title}</h3>
-      <ul className="text-white/70 text-lg font-light leading-relaxed mb-8 space-y-3">
+    <div className="opacity-0 animate-fade-in-slide">
+      <h3 className="text-2xl font-bold text-white mb-6">{project.title}</h3>
+      <ul className="text-white/70 text-sm font-light leading-relaxed mb-8 space-y-1">
         {project.details.map((detail, index) => (
           <li key={index} className="flex gap-3">
             <span className="text-white/50 mt-1.5">•</span>
@@ -54,28 +39,17 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         {project.link && (
           <a
             href={project.link}
-            className="inline-flex items-center gap-2 text-white/90 hover:text-white font-light transition-colors text-lg group/link"
+            target="_blank"
+            className="inline-flex items-center gap-2 text-white/90 hover:text-white font-light transition-colors text-sm group/link"
           >
             <span>View Project</span>
-            <svg
-              className="w-5 h-5 transition-transform group-hover/link:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              />
-            </svg>
+            <ArrowRight className="w-5 h-5 transition-transform group-hover/link:translate-x-1" />
           </a>
         )}
         {project.github && (
           <a
             href={project.github}
-            className="inline-flex items-center gap-2 text-white/90 hover:text-white font-light transition-colors text-lg group/github"
+            className="inline-flex items-center gap-2 text-white/90 hover:text-white font-light transition-colors text-sm group/github"
             target="_blank"
             rel="noopener noreferrer"
           >
