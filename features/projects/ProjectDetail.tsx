@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 interface Project {
   title: string;
@@ -6,6 +7,7 @@ interface Project {
   tags: string[];
   link?: string;
   github?: string;
+  thumbnail?: string;
   details: string[];
 }
 
