@@ -2,7 +2,6 @@
 
 import { useRef, useEffect } from 'react';
 import { SpotLight as ThreeSpotLight } from 'three';
-import { useFrame } from '@react-three/fiber';
 
 interface StageLightProps {
   position: [number, number, number];
@@ -11,7 +10,6 @@ interface StageLightProps {
 
 export default function StageLight({ position, target }: StageLightProps) {
   const spotLightRef = useRef<ThreeSpotLight>(null);
-  const timeRef = useRef<number>(0);
 
   useEffect(() => {
     if (spotLightRef.current) {
@@ -20,15 +18,33 @@ export default function StageLight({ position, target }: StageLightProps) {
     }
   }, [target]);
 
-  useFrame((_, delta) => {
+  useEffect(() => {
+    if (!spotLightRef.current) return;
+
+    const startTime = performance.now();
     const intensityLimit = 3000;
-    const durationSec = 1.0;
-    if (!spotLightRef.current || timeRef.current >= durationSec) return;
-    timeRef.current += delta;
-    const t = Math.min(timeRef.current / durationSec, 1);
-    const eased = easeOutQuad(t);
-    spotLightRef.current.intensity = eased * intensityLimit;
-  });
+    const durationMs = 1000;
+
+    const animate = () => {
+      if (!spotLightRef.current) return;
+
+      const elapsed = performance.now() - startTime;
+      if (elapsed >= durationMs) {
+        spotLightRef.current.intensity = intensityLimit;
+        return;
+      }
+
+      const t = elapsed / durationMs;
+      const eased = easeOutQuad(t);
+      spotLightRef.current.intensity = eased * intensityLimit;
+
+      requestAnimationFrame(animate);
+    };
+
+    const animationId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationId);
+  }, []);
 
   return (
     <>
