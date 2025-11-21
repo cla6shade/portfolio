@@ -1,5 +1,5 @@
-import { createContext, ReactNode, use, useState } from 'react';
-import { Vector3 } from 'three';
+import { createContext, ReactNode, use, useEffect, useRef, useState } from 'react';
+import { Camera, Vector3 } from 'three';
 import { PIANO_POSITION, PIANO_ROTATION } from '@/features/hero/piano/constants';
 
 export type THeroContext = {
@@ -10,6 +10,7 @@ export type THeroContext = {
   setIsAnimating: (animating: boolean) => void;
   focusPiano: () => void;
   unfocusPiano: () => void;
+  setCameraRef: (camera: Camera) => void;
 };
 
 const initialCameraPos = new Vector3(-0.68, 9.19, 14.46);
@@ -23,6 +24,7 @@ export const HeroContext = createContext<THeroContext>({
   setIsAnimating: () => {},
   focusPiano: () => {},
   unfocusPiano: () => {},
+  setCameraRef: () => {},
 });
 
 export type HeroContextProps = {
@@ -34,6 +36,50 @@ export function HeroContextProvider({ children }: HeroContextProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [cameraTarget, setCameraTarget] = useState(initialCameraPos);
   const [lookAtTarget, setLookAtTarget] = useState(initialLookAt);
+
+  const cameraRef = useRef<Camera | null>(null);
+  const currentLookAtRef = useRef(new Vector3(0, 0, 0));
+  const animationFrameRef = useRef<number | null>(null);
+
+  const setCameraRef = (camera: Camera) => {
+    cameraRef.current = camera;
+    currentLookAtRef.current.copy(initialLookAt);
+  };
+
+  const animateCamera = (targetPosition: Vector3, targetLookAt: Vector3) => {
+    if (!cameraRef.current) return;
+
+    const camera = cameraRef.current;
+    const lerpFactor = 0.05;
+
+    const animate = () => {
+      if (!cameraRef.current) return;
+
+      const posDistance = camera.position.distanceTo(targetPosition);
+      const lookAtDistance = currentLookAtRef.current.distanceTo(targetLookAt);
+
+      if (posDistance < 0.01 && lookAtDistance < 0.01) {
+        camera.position.copy(targetPosition);
+        currentLookAtRef.current.copy(targetLookAt);
+        camera.lookAt(currentLookAtRef.current);
+        setIsAnimating(false);
+        return;
+      }
+
+      camera.position.lerp(targetPosition, lerpFactor);
+      currentLookAtRef.current.lerp(targetLookAt, lerpFactor);
+      camera.lookAt(currentLookAtRef.current);
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    if (animationFrameRef.current !== null) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
+
+    setIsAnimating(true);
+    animationFrameRef.current = requestAnimationFrame(animate);
+  };
 
   const focusPiano = () => {
     setIsPianoFocused(true);
@@ -51,15 +97,23 @@ export function HeroContextProvider({ children }: HeroContextProps) {
 
     setCameraTarget(cameraPos);
     setLookAtTarget(pianoCenter);
-    setIsAnimating(true);
+    animateCamera(cameraPos, pianoCenter);
   };
 
   const unfocusPiano = () => {
     setIsPianoFocused(false);
     setCameraTarget(initialCameraPos);
     setLookAtTarget(initialLookAt);
-    setIsAnimating(true);
+    animateCamera(initialCameraPos, initialLookAt);
   };
+
+  useEffect(() => {
+    return () => {
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, []);
 
   return (
     <HeroContext.Provider
@@ -71,6 +125,7 @@ export function HeroContextProvider({ children }: HeroContextProps) {
         setIsAnimating,
         focusPiano,
         unfocusPiano,
+        setCameraRef,
       }}
     >
       {children}
