@@ -5,9 +5,12 @@ import { Button } from '@/components/ui/button';
 import Scene from '@/features/hero/scene/Scene';
 import { MoveDown, Undo2 } from 'lucide-react';
 import HeroTextSection from '@/features/hero/HeroTextSection';
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 function HeroContent() {
   const { isPianoFocused, unfocusPiano } = useHero();
+  const { targetRef: observerTargetRef, isIntersecting: shouldMountScene } =
+    useIntersectionObserver({ rootMargin: '100px' });
 
   const handleBackClick = () => {
     unfocusPiano();
@@ -17,7 +20,8 @@ function HeroContent() {
     <main className="w-full max-h-dvh aspect-video relative">
       {!isPianoFocused && <HeroTextSection />}
 
-      <Scene />
+      <Scene frameloop={shouldMountScene ? 'always' : 'never'} />
+      <div ref={observerTargetRef} className="absolute inset-0 pointer-events-none" />
 
       <div className="absolute bottom-6 w-full flex justify-center">
         {!isPianoFocused ? (
