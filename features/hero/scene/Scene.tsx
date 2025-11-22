@@ -1,6 +1,6 @@
 'use client';
 
-import { Canvas, ThreeEvent } from '@react-three/fiber';
+import { Canvas, Frameloop, ThreeEvent } from '@react-three/fiber';
 import Floor from '@/features/hero/scene/Floor';
 import StageLight from '@/features/hero/scene/StageLight';
 import { useHero } from '@/features/hero/HeroProvider';
@@ -9,7 +9,7 @@ import Piano from '@/features/hero/piano/Piano';
 import { useRef } from 'react';
 import { INITIAL_CAMERA_FOV, INITIAL_CAMERA_POSITION } from '@/features/hero/piano/constants';
 
-export default function Scene() {
+export default function Scene({ frameloop }: { frameloop: Frameloop }) {
   const { isPianoFocused, isAnimating, focusPiano, setCameraRef } = useHero();
   const canvasRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +29,11 @@ export default function Scene() {
             fov: INITIAL_CAMERA_FOV,
             position: INITIAL_CAMERA_POSITION,
           }}
+          frameloop={frameloop}
           shadows
+          resize={{
+            scroll: false,
+          }}
           onCreated={({ camera }) => setCameraRef(camera)}
         >
           <StageLight position={[7, 13, 0]} target={[7, 4, 0]} />
