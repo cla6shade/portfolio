@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface Project {
   title: string;
   description: string;
@@ -16,11 +18,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div className="relative rounded-xl shadow-2xl overflow-hidden h-96 w-full">
       {project.thumbnail && (
-        <img
-          src={project.thumbnail}
-          alt={project.title}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        <Image src={project.thumbnail} alt={project.title} className="object-cover" fill />
       )}
 
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
