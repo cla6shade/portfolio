@@ -12,7 +12,6 @@ export function loadPiano(): Promise<Player> {
   cachedPromise = (async () => {
     const audioContext = new AudioContext();
     const instrument = await Soundfont.instrument(audioContext, 'acoustic_grand_piano');
-    console.log('🎹 Piano samples loaded');
     return instrument as Player;
   })();
 
