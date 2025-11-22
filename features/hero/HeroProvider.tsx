@@ -53,8 +53,6 @@ export function HeroContextProvider({ children }: HeroContextProps) {
     const lerpFactor = 0.05;
 
     const animate = () => {
-      if (!cameraRef.current) return;
-
       const posDistance = camera.position.distanceTo(targetPosition);
       const lookAtDistance = currentLookAtRef.current.distanceTo(targetLookAt);
 
@@ -63,6 +61,7 @@ export function HeroContextProvider({ children }: HeroContextProps) {
         currentLookAtRef.current.copy(targetLookAt);
         camera.lookAt(currentLookAtRef.current);
         setIsAnimating(false);
+        animationFrameRef.current = null;
         return;
       }
 
