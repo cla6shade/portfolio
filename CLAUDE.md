@@ -596,7 +596,6 @@ function Parent() {
 
 **참고**:
 - `features/hero/HeroProvider.tsx`: 카메라 애니메이션에서 ref 사용
-- `components/CardSwap.tsx`: GSAP 애니메이션
 
 ### 13. 테스트 작성 규칙
 
