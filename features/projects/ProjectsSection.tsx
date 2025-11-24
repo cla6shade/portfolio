@@ -43,10 +43,10 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen">
+    <section className="w-full min-h-screen">
       <DefaultPad>
-        <div className="flex">
-          <div ref={containerRef} className="w-1/2 flex flex-col gap-8 py-[30dvh] pr-20">
+        <div className="flex relative">
+          <div ref={containerRef} className="w-1/2 flex flex-col gap-8 pt-[30dvh] pb-[25dvh] pr-20">
             {projects.map((project, index) => (
               <div
                 key={`project-${index}`}
@@ -58,8 +58,9 @@ export default function ProjectsSection() {
               </div>
             ))}
           </div>
-          <div className="w-1/2 sticky top-0 h-screen flex flex-col pt-[30dvh]">
-            <h2 className="text-5xl font-bold mb-12">PROJECTS</h2>
+          <div className="w-1/2 top-0 h-screen flex flex-col py-[30dvh] sticky">
+            <h2 className="text-xl mb-4">PROJECTS</h2>
+            <h2 className="text-5xl font-bold mb-12">{projects[currentIndex].title}</h2>
             <ProjectDetail
               project={projects[currentIndex]}
               key={`project-detail-${currentIndex}`}
