@@ -44,3 +44,6 @@ next-env.d.ts
 .idea
 .claude
 nul
+
+*storybook.log
+storybook-static
