@@ -1,10 +1,10 @@
 'use client';
 
-import { HeroContextProvider, useHero } from '@/features/hero/HeroProvider';
+import { HeroContextProvider, useHero } from '@/features/landing/hero/HeroProvider';
 import { Button } from '@/components/ui/button';
-import Scene from '@/features/hero/scene/Scene';
+import Scene from '@/features/landing/hero/scene/Scene';
 import { MoveDown, Undo2 } from 'lucide-react';
-import HeroTextSection from '@/features/hero/HeroTextSection';
+import HeroTextSection from '@/features/landing/hero/HeroTextSection';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 function HeroContent() {

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { KEY_PROPERTIES } from '@/features/hero/piano/constants';
+import { KEY_PROPERTIES } from '@/features/landing/hero/piano/constants';
 import { ThreeEvent } from '@react-three/fiber';
 import { Edges } from '@react-three/drei';
-import { useHero } from '@/features/hero/HeroProvider';
+import { useHero } from '@/features/landing/hero/HeroProvider';
 
 export interface PianoKeyProps {
   keyIndex: number;

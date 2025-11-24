@@ -1,6 +1,6 @@
 import { createContext, ReactNode, use, useEffect, useRef, useState } from 'react';
 import { Camera, Vector3 } from 'three';
-import { PIANO_POSITION, PIANO_ROTATION } from '@/features/hero/piano/constants';
+import { PIANO_POSITION, PIANO_ROTATION } from '@/features/landing/hero/piano/constants';
 
 export type THeroContext = {
   isPianoFocused: boolean;

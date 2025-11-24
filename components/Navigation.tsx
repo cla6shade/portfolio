@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import DefaultPad from '@/components/DefaultPad';
+import DefaultPad from '@/components/container/DefaultPad';
 import {
   NavigationMenu,
   NavigationMenuItem,

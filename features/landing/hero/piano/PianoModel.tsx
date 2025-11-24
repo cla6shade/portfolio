@@ -12,7 +12,7 @@ import {
   PIANO_ROTATION,
 } from './constants';
 import { playPianoNote, Player } from './pianoSound';
-import PianoKey from '@/features/hero/piano/PianoKey';
+import PianoKey from '@/features/landing/hero/piano/PianoKey';
 import { ReactNode } from 'react';
 
 interface PianoProps {

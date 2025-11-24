@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { projects } from './constants';
 import ProjectCard from './ProjectCard';
 import ProjectDetail from './ProjectDetail';
-import DefaultPad from '@/components/DefaultPad';
+import DefaultPad from '@/components/container/DefaultPad';
 
 export default function ProjectsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,7 +43,7 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section className="w-full min-h-screen">
+    <section className="w-full min-h-screen bg-gradient-to-b from-black via-neutral-900 to-neutral-800">
       <DefaultPad>
         <div className="flex relative">
           <div ref={containerRef} className="w-1/2 flex flex-col gap-8 pt-[30dvh] pb-[25dvh] pr-20">
