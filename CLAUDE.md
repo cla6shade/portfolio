@@ -77,7 +77,7 @@ function Component({ children }: { children: ReactNode }) {
 필요한 함수와 타입만을 named import로 가져옵니다:
 - Hooks: `useState`, `useEffect`, `useRef`, `useMemo`, `useCallback` 등
 - Types: `type ReactNode`, `type CSSProperties` 등
-- Context: `createContext`, `use` (단, `useContext`는 사용 금지)
+- Context: `createContext`, `use`
 
 ### 2. 컴포넌트 선언 규칙
 
@@ -99,8 +99,6 @@ export default function MyComponent({ prop1, prop2 }: MyComponentProps) {
   return <div>{prop1}</div>;
 }
 ```
-
-**이유**: 함수 선언문(`function` 키워드)은 명확한 함수 이름을 제공하고, 디버깅과 스택 트레이스 추적에 유리합니다. `React.FC`는 절대 사용하지 않습니다.
 
 ### 3. Ref 전달 규칙
 
@@ -374,12 +372,6 @@ export default function Component({ children, title }: ComponentProps) {
   );
 }
 ```
-
-**이유**:
-- `React.FC`는 암묵적으로 `children`을 포함하여 타입 안정성을 해칩니다
-- 명시적인 props 타입이 더 명확하고 안전합니다
-- 제네릭 사용이 복잡해집니다
-
 ### 10. DefaultPad 컴포넌트 사용
 
 **화면 컨텐츠의 위치와 너비를 맞출 때 DefaultPad.tsx를 사용.**
@@ -465,8 +457,6 @@ useEffect(() => {
 ```
 
 **예외 사항**: 이벤트 리스너를 useEffect 사이클 내부에서 등록하는 경우에만 이벤트 핸들러에서 state를 변경할 수 있습니다.
-
-**이유**: useEffect 내부에서의 직접적인 state 변경은 예측 불가능한 리렌더링과 무한 루프를 유발할 수 있습니다.
 
 **추가 규칙: State 의존성 체인 금지**
 
@@ -604,11 +594,6 @@ function Parent() {
 }
 ```
 
-**이유**:
-- 애니메이션 프레임마다 state를 변경하면 불필요한 리렌더링이 발생합니다
-- ref를 사용하면 DOM을 직접 조작하여 성능이 향상됩니다
-- GSAP 같은 애니메이션 라이브러리는 DOM 조작을 기반으로 동작합니다
-
 **참고**:
 - `features/hero/HeroProvider.tsx`: 카메라 애니메이션에서 ref 사용
 - `components/CardSwap.tsx`: GSAP 애니메이션
@@ -646,12 +631,6 @@ describe('MyComponent', () => {
   });
 });
 ```
-
-**필수 import 목록**:
-- **테스트 구조**: `describe`, `it` (또는 `test`)
-- **Assertion**: `expect`
-- **Mock**: `vi`
-- **라이프사이클**: `beforeEach`, `afterEach`, `beforeAll`, `afterAll`
 
 **테스트 파일 작성 규칙**:
 ```typescript
@@ -702,11 +681,6 @@ export default defineConfig({
 });
 ```
 
-**이유**:
-- 명시적인 import는 코드의 의존성을 명확하게 합니다
-- UMD Global은 타입 안정성을 해치고 예측 불가능한 동작을 유발할 수 있습니다
-- 모던 JavaScript/TypeScript 모듈 시스템과 일관성을 유지합니다
-
 ### 14. Import 경로 규칙
 
 **프로젝트 내부 모듈을 import할 때는 절대 상대 경로를 사용하지 말 것. 항상 절대 경로(@/ alias)를 사용.**
@@ -727,11 +701,6 @@ import { PIANO_POSITION } from './constants';
 import { type PianoKeyProps } from './types';
 ```
 
-**규칙**:
-- 다른 디렉토리의 모듈은 무조건 `@/` 사용
-- 같은 디렉토리 내 파일만 `./` 상대 경로 허용
-- 부모 디렉토리(`../`) 경로는 절대 사용 금지
-
 **tsconfig.json 설정**:
 ```json
 {
@@ -743,11 +712,53 @@ import { type PianoKeyProps } from './types';
 }
 ```
 
-**이유**:
-- 파일 이동 시 import 경로 수정이 불필요
-- 깊은 중첩 구조에서 `../../../`를 피할 수 있음
-- 코드 가독성과 유지보수성 향상
-- import 경로가 명확하고 일관성 있음
+### 15. 이모지 사용 금지
+
+**모든 코드 파일에서 이모지를 절대 사용하지 말 것.**
+
+```typescript
+// [잘못된 예시]잘못된 예시: 이모지 사용
+export default function MyComponent() {
+  return (
+    <div>
+      <h1>Welcome! 👋</h1>
+      <button>Click me! 🚀</button>
+    </div>
+  );
+}
+
+// 주석에도 이모지 사용 금지
+// TODO: Fix this bug 🐛
+const handleClick = () => {
+  // 성공! ✅
+  console.log('Success! 🎉');
+};
+
+// [올바른 예시]올바른 예시: 이모지 없이 작성
+export default function MyComponent() {
+  return (
+    <div>
+      <h1>Welcome!</h1>
+      <button>Click me!</button>
+    </div>
+  );
+}
+
+// 주석도 텍스트만 사용
+// TODO: Fix this bug
+const handleClick = () => {
+  // Success
+  console.log('Success!');
+};
+```
+
+**규칙**:
+- JSX/TSX 콘텐츠에 이모지 사용 금지
+- 주석에 이모지 사용 금지
+- console.log 등 디버그 메시지에 이모지 사용 금지
+- 변수명, 함수명, 타입명에 이모지 사용 금지
+- 문자열 리터럴에 이모지 사용 금지
+- 커밋 메시지에 이모지 사용 금지
 
 ## 추가 베스트 프랙티스
 
@@ -869,5 +880,6 @@ import { type MyCustomType } from './types';
 - [ ] 애니메이션은 ref로 DOM 직접 조작
 - [ ] 테스트는 Vitest 사용, describe/it/expect 명시적 import
 - [ ] 프로젝트 내부 모듈은 절대 경로(@/) 사용, 상대 경로 금지
+- [ ] 모든 코드에서 이모지 사용 금지
 
 이 규칙들을 준수하여 일관성 있고 유지보수 가능한 코드를 작성하세요.
