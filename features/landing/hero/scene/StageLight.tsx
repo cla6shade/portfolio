@@ -22,7 +22,7 @@ export default function StageLight({ position, target }: StageLightProps) {
     if (!spotLightRef.current) return;
 
     const startTime = performance.now();
-    const intensityLimit = 3000;
+    const intensityLimit = 1000;
     const durationMs = 1000;
 
     const animate = () => {
