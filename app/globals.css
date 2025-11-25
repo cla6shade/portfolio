@@ -148,3 +148,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.heading-gradient {
+  @apply text-transparent bg-gradient-to-r from-peru via-sandy-brown to-peach-puff font-bold bg-clip-text;
+}
