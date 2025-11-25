@@ -759,6 +759,26 @@ const handleClick = () => {
 - 문자열 리터럴에 이모지 사용 금지
 - 커밋 메시지에 이모지 사용 금지
 
+### 16. 리스트 렌더링 Key 규칙
+
+**리스트를 렌더링할 때 key 값은 `${prefix}-${index}` 형식을 사용하고, prefix는 렌더링하는 콘텐츠에 따라 의미있게 지정.**
+
+```typescript
+// [잘못된 예시]
+{projects.map((project, index) => (
+  <ProjectCard key={index} {...project} />
+))}
+
+// [올바른 예시]
+{projects.map((project, index) => (
+  <ProjectCard key={`project-info-${index}`} {...project} />
+))}
+
+{techStacks.map((stack, index) => (
+  <TechStackCard key={`tech-stack-${index}`} {...stack} />
+))}
+```
+
 ## 추가 베스트 프랙티스
 
 ### Client Component vs Server Component
