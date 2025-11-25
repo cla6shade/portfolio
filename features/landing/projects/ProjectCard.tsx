@@ -16,7 +16,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="relative rounded-xl shadow-2xl overflow-hidden h-96 w-full">
+    <div className="relative rounded-xl shadow-2xl overflow-hidden h-[26rem] w-lg">
       {project.thumbnail && (
         <Image src={project.thumbnail} alt={project.title} className="object-cover" fill />
       )}

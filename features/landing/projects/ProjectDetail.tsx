@@ -16,8 +16,9 @@ interface ProjectDetailProps {
 
 export default function ProjectDetail({ project }: ProjectDetailProps) {
   return (
-    <div className="space-y-4 animate-slide-in min-h-80">
-      <div className="space-y-2">
+    <div className="space-y-4 min-h-80 w-lg">
+      <h2 className="text-5xl font-bold mb-12 opacity-0 animate-fade-in-slide">{project.title}</h2>
+      <div className="space-y-2 opacity-0 animate-fade-in-slide delay-100">
         {project.details.map((detail, idx) => (
           <div key={idx} className="flex items-start">
             <span className="mr-2 text-gray-400 mt-0.5 text-base">•</span>
@@ -26,7 +27,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         ))}
       </div>
 
-      <div className="flex gap-4 pt-2">
+      <div className="flex gap-4 pt-2 opacity-0 animate-fade-in-slide delay-200">
         {project.link && (
           <a
             href={project.link}
@@ -50,23 +51,6 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           </a>
         )}
       </div>
-
-      <style jsx>{`
-        @keyframes slide-in {
-          from {
-            opacity: 0;
-            transform: translateX(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        .animate-slide-in {
-          animation: slide-in 0.4s ease-out;
-        }
-      `}</style>
     </div>
   );
 }
