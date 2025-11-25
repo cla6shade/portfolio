@@ -1,8 +1,8 @@
 <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="ditto-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:oklch(0.909 0.088 65.2);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:oklch(0.903 0.079 68.8);stop-opacity:1" />
     </linearGradient>
   </defs>
 
@@ -18,36 +18,36 @@
 
   <!-- Book -->
   <g transform="translate(150, 80)">
-    <rect x="0" y="0" width="120" height="140" rx="5" fill="#FFFFFF" opacity="0.95"/>
-    <rect x="0" y="0" width="10" height="140" rx="5" fill="#047857"/>
-    <rect x="60" y="0" width="1" height="140" fill="#D1D5DB" opacity="0.5"/>
+    <rect x="0" y="0" width="120" height="140" rx="5" fill="oklch(0.978 0.027 88.5)" opacity="0.95"/>
+    <rect x="0" y="0" width="10" height="140" rx="5" fill="oklch(0.649 0.113 59.4)"/>
+    <rect x="60" y="0" width="1" height="140" fill="oklch(0.756 0.117 57.5)" opacity="0.5"/>
   </g>
 
   <!-- Checkboxes on book -->
   <g transform="translate(165, 100)">
     <!-- Checkbox 1 - checked -->
-    <rect x="0" y="0" width="20" height="20" rx="4" fill="white" stroke="#059669" stroke-width="2"/>
-    <path d="M 4 10 L 8 14 L 16 6" stroke="#059669" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <rect x="30" y="5" width="60" height="3" rx="1.5" fill="#047857" opacity="0.4"/>
-    <rect x="30" y="12" width="40" height="3" rx="1.5" fill="#047857" opacity="0.4"/>
+    <rect x="0" y="0" width="20" height="20" rx="4" fill="white" stroke="oklch(0.649 0.113 59.4)" stroke-width="2"/>
+    <path d="M 4 10 L 8 14 L 16 6" stroke="oklch(0.649 0.113 59.4)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <rect x="30" y="5" width="60" height="3" rx="1.5" fill="oklch(0.756 0.117 57.5)" opacity="0.4"/>
+    <rect x="30" y="12" width="40" height="3" rx="1.5" fill="oklch(0.756 0.117 57.5)" opacity="0.4"/>
 
     <!-- Checkbox 2 - checked -->
-    <rect x="0" y="35" width="20" height="20" rx="4" fill="white" stroke="#059669" stroke-width="2"/>
-    <path d="M 4 45 L 8 49 L 16 41" stroke="#059669" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <rect x="30" y="40" width="60" height="3" rx="1.5" fill="#047857" opacity="0.4"/>
-    <rect x="30" y="47" width="45" height="3" rx="1.5" fill="#047857" opacity="0.4"/>
+    <rect x="0" y="35" width="20" height="20" rx="4" fill="white" stroke="oklch(0.649 0.113 59.4)" stroke-width="2"/>
+    <path d="M 4 45 L 8 49 L 16 41" stroke="oklch(0.649 0.113 59.4)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <rect x="30" y="40" width="60" height="3" rx="1.5" fill="oklch(0.756 0.117 57.5)" opacity="0.4"/>
+    <rect x="30" y="47" width="45" height="3" rx="1.5" fill="oklch(0.756 0.117 57.5)" opacity="0.4"/>
 
     <!-- Checkbox 3 - unchecked -->
-    <rect x="0" y="70" width="20" height="20" rx="4" fill="white" stroke="#059669" stroke-width="2"/>
-    <rect x="30" y="75" width="60" height="3" rx="1.5" fill="#047857" opacity="0.4"/>
-    <rect x="30" y="82" width="50" height="3" rx="1.5" fill="#047857" opacity="0.4"/>
+    <rect x="0" y="70" width="20" height="20" rx="4" fill="white" stroke="oklch(0.649 0.113 59.4)" stroke-width="2"/>
+    <rect x="30" y="75" width="60" height="3" rx="1.5" fill="oklch(0.756 0.117 57.5)" opacity="0.4"/>
+    <rect x="30" y="82" width="50" height="3" rx="1.5" fill="oklch(0.756 0.117 57.5)" opacity="0.4"/>
   </g>
 
   <!-- Pencil -->
   <g transform="translate(300, 180) rotate(-45)">
-    <rect x="0" y="0" width="15" height="60" rx="2" fill="#FBBF24"/>
-    <polygon points="0,60 7.5,75 15,60" fill="#F59E0B"/>
-    <rect x="0" y="0" width="15" height="8" rx="2" fill="#F87171"/>
-    <rect x="5" y="2" width="5" height="4" fill="#FEE2E2"/>
+    <rect x="0" y="0" width="15" height="60" rx="2" fill="oklch(0.756 0.117 57.5)"/>
+    <polygon points="0,60 7.5,75 15,60" fill="oklch(0.649 0.113 59.4)"/>
+    <rect x="0" y="0" width="15" height="8" rx="2" fill="oklch(0.903 0.079 68.8)"/>
+    <rect x="5" y="2" width="5" height="4" fill="oklch(0.978 0.027 88.5)"/>
   </g>
 </svg>

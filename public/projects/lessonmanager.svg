@@ -1,8 +1,8 @@
 <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="piano-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1E1B4B;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#4C1D95;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:oklch(0.649 0.113 59.4);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:oklch(0.756 0.117 57.5);stop-opacity:1" />
     </linearGradient>
   </defs>
 
@@ -21,13 +21,13 @@
   <!-- Piano keys -->
   <g transform="translate(100, 160)">
     <!-- White keys -->
-    <rect x="0" y="0" width="40" height="100" rx="3" fill="#FFFFFF" stroke="#1F2937" stroke-width="2"/>
-    <rect x="45" y="0" width="40" height="100" rx="3" fill="#FFFFFF" stroke="#1F2937" stroke-width="2"/>
-    <rect x="90" y="0" width="40" height="100" rx="3" fill="#FFFFFF" stroke="#1F2937" stroke-width="2"/>
-    <rect x="135" y="0" width="40" height="100" rx="3" fill="#FFFFFF" stroke="#1F2937" stroke-width="2"/>
-    <rect x="180" y="0" width="40" height="100" rx="3" fill="#FFFFFF" stroke="#1F2937" stroke-width="2"/>
-    <rect x="225" y="0" width="40" height="100" rx="3" fill="#FFFFFF" stroke="#1F2937" stroke-width="2"/>
-    <rect x="270" y="0" width="40" height="100" rx="3" fill="#FFFFFF" stroke="#1F2937" stroke-width="2"/>
+    <rect x="0" y="0" width="40" height="100" rx="3" fill="oklch(0.978 0.027 88.5)" stroke="#1F2937" stroke-width="2"/>
+    <rect x="45" y="0" width="40" height="100" rx="3" fill="oklch(0.978 0.027 88.5)" stroke="#1F2937" stroke-width="2"/>
+    <rect x="90" y="0" width="40" height="100" rx="3" fill="oklch(0.978 0.027 88.5)" stroke="#1F2937" stroke-width="2"/>
+    <rect x="135" y="0" width="40" height="100" rx="3" fill="oklch(0.978 0.027 88.5)" stroke="#1F2937" stroke-width="2"/>
+    <rect x="180" y="0" width="40" height="100" rx="3" fill="oklch(0.978 0.027 88.5)" stroke="#1F2937" stroke-width="2"/>
+    <rect x="225" y="0" width="40" height="100" rx="3" fill="oklch(0.978 0.027 88.5)" stroke="#1F2937" stroke-width="2"/>
+    <rect x="270" y="0" width="40" height="100" rx="3" fill="oklch(0.978 0.027 88.5)" stroke="#1F2937" stroke-width="2"/>
 
     <!-- Black keys -->
     <rect x="28" y="0" width="24" height="60" rx="2" fill="#1F2937"/>
@@ -40,19 +40,19 @@
   <!-- Musical notes -->
   <g transform="translate(150, 60)">
     <!-- Note 1 -->
-    <ellipse cx="0" cy="40" rx="8" ry="6" fill="#A78BFA" transform="rotate(-20 0 40)"/>
-    <rect x="-1" y="10" width="2" height="30" fill="#A78BFA"/>
+    <ellipse cx="0" cy="40" rx="8" ry="6" fill="oklch(0.903 0.079 68.8)" transform="rotate(-20 0 40)"/>
+    <rect x="-1" y="10" width="2" height="30" fill="oklch(0.903 0.079 68.8)"/>
 
     <!-- Note 2 -->
-    <ellipse cx="40" cy="30" rx="8" ry="6" fill="#C4B5FD" transform="rotate(-20 40 30)"/>
-    <rect x="39" y="0" width="2" height="30" fill="#C4B5FD"/>
+    <ellipse cx="40" cy="30" rx="8" ry="6" fill="oklch(0.909 0.088 65.2)" transform="rotate(-20 40 30)"/>
+    <rect x="39" y="0" width="2" height="30" fill="oklch(0.909 0.088 65.2)"/>
 
     <!-- Note 3 -->
-    <ellipse cx="80" cy="35" rx="8" ry="6" fill="#DDD6FE" transform="rotate(-20 80 35)"/>
-    <rect x="79" y="5" width="2" height="30" fill="#DDD6FE"/>
+    <ellipse cx="80" cy="35" rx="8" ry="6" fill="oklch(0.978 0.027 88.5)" transform="rotate(-20 80 35)"/>
+    <rect x="79" y="5" width="2" height="30" fill="oklch(0.978 0.027 88.5)"/>
   </g>
 
   <!-- Decorative circles -->
-  <circle cx="420" cy="80" r="30" fill="none" stroke="#A78BFA" stroke-width="2" opacity="0.3"/>
-  <circle cx="60" cy="220" r="20" fill="none" stroke="#C4B5FD" stroke-width="2" opacity="0.3"/>
+  <circle cx="420" cy="80" r="30" fill="none" stroke="oklch(0.903 0.079 68.8)" stroke-width="2" opacity="0.3"/>
+  <circle cx="60" cy="220" r="20" fill="none" stroke="oklch(0.909 0.088 65.2)" stroke-width="2" opacity="0.3"/>
 </svg>
