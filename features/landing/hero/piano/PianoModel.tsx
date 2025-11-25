@@ -30,7 +30,7 @@ export default function PianoModel({
     <group position={offset} rotation={rotation}>
       <mesh position={[0, -0.2, 0]} castShadow receiveShadow>
         <boxGeometry args={[CASE_WIDTH, 0.3, CASE_LENGTH]} />
-        <meshStandardMaterial color="#222222" />
+        <meshStandardMaterial color="#CD853F" />
       </mesh>
 
       <group position={[-PIANO_WIDTH / 2, 0, 0]}>
