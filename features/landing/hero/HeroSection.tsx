@@ -6,6 +6,7 @@ import Scene from '@/features/landing/hero/scene/Scene';
 import { MoveDown, Undo2 } from 'lucide-react';
 import HeroTextSection from '@/features/landing/hero/HeroTextSection';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
+import MusicController from '@/components/music-controller/MusicController';
 
 function HeroContent() {
   const { isPianoFocused, unfocusPiano } = useHero();
@@ -29,14 +30,13 @@ function HeroContent() {
             <MoveDown />
           </div>
         ) : (
-          <Button
-            onClick={handleBackClick}
-            variant="secondary"
-            className="flex items-center gap-2 px-6 py-3 rounded-full"
-          >
-            <Undo2 size={20} />
-            돌아가기
-          </Button>
+          <div className="flex flex-col gap-4">
+            <MusicController />
+            <Button variant="secondary" className="rounded-full" onClick={handleBackClick}>
+              <Undo2 size={16} />
+              Back
+            </Button>
+          </div>
         )}
       </div>
     </main>
