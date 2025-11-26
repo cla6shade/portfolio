@@ -11,7 +11,13 @@ interface TechStackCardProps {
   totalCount: number;
 }
 
-export default function TechStackCard({ name, src, sectionRef, index, totalCount }: TechStackCardProps) {
+export default function TechStackCard({
+  name,
+  src,
+  sectionRef,
+  index,
+  totalCount,
+}: TechStackCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,14 +37,20 @@ export default function TechStackCard({ name, src, sectionRef, index, totalCount
         const firstFlip = {
           start: cardDelay,
           duration: 0.15,
-          get end() { return this.start + this.duration; },
+          get end() {
+            return this.start + this.duration;
+          },
         };
 
         const secondFlip = {
           start: 0.8 + cardDelay * 0.3,
           duration: 0.1,
-          get end() { return Math.min(this.start + this.duration, 1.0); },
-          get actualDuration() { return this.end - this.start; },
+          get end() {
+            return Math.min(this.start + this.duration, 1.0);
+          },
+          get actualDuration() {
+            return this.end - this.start;
+          },
         };
 
         if (scrollProgress < firstFlip.start) return 0;
@@ -64,22 +76,12 @@ export default function TechStackCard({ name, src, sectionRef, index, totalCount
   }, [sectionRef, index, totalCount]);
 
   return (
-    <div ref={cardRef} className="relative w-full h-48" style={{ transformStyle: 'preserve-3d' }}>
-      <div
-        className="absolute inset-0 bg-background border border-primary/20 rounded-lg"
-        style={{
-          backfaceVisibility: 'hidden',
-          WebkitBackfaceVisibility: 'hidden',
-        }}
-      />
+    <div ref={cardRef} className="relative w-full h-48 transform-3d">
+      <div className="absolute inset-0 rounded-lg backface-hidden" />
 
       <div
-        className="absolute inset-0 bg-background border border-primary/20 rounded-lg flex flex-col items-center justify-center gap-4 p-6"
-        style={{
-          backfaceVisibility: 'hidden',
-          WebkitBackfaceVisibility: 'hidden',
-          transform: 'rotateY(180deg)',
-        }}
+        className="absolute inset-0 rounded-lg flex
+        flex-col items-center justify-center gap-4 p-6 backface-hidden rotate-y-180"
       >
         <div className="w-20 h-20 relative">
           <Image src={src} alt={name} fill className="object-contain" />

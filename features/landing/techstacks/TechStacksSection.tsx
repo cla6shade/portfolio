@@ -19,7 +19,7 @@ export default function TechStacksSection() {
     <div ref={sectionRef} className="relative h-[300dvh] bg-neutral-900">
       <div className="sticky top-0 h-[100dvh] flex items-center justify-center">
         <DefaultPad className="w-full flex flex-col gap-12">
-          <h2 className="text-7xl font-bold text-primary uppercase heading-gradient">TECH STACK</h2>
+          <h2 className="text-7xl heading-gradient font-bold">TECH STACK</h2>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl w-full">
             {TECH_STACKS.map((stack, index) => (
