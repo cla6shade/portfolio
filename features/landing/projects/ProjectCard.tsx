@@ -1,4 +1,8 @@
+'use client';
+
+import { useRef } from 'react';
 import Image from 'next/image';
+import useHoverTilt from '@/hooks/useHoverTilt';
 
 interface Project {
   title: string;
@@ -15,8 +19,15 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useHoverTilt(cardRef, { maxRotation: 10, translateZ: 20 });
+
   return (
-    <div className="relative rounded-xl shadow-2xl overflow-hidden h-[26rem] w-lg">
+    <div
+      ref={cardRef}
+      className="relative rounded-xl shadow-2xl overflow-hidden h-[26rem] w-full transition-transform duration-200 ease-out preserve-3d"
+    >
       {project.thumbnail && (
         <Image src={project.thumbnail} alt={project.title} className="object-cover" fill />
       )}
@@ -28,9 +39,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <p className="text-gray-200 text-lg mb-4">{project.description}</p>
 
         <div className="flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
+          {project.tags.map((tag, index) => (
             <span
-              key={tag}
+              key={`project-tag-${index}`}
               className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-medium"
             >
               {tag}
