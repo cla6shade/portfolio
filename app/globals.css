@@ -5,6 +5,8 @@
 
 @theme inline {
   --font-playwrite: var(--font-playwrite);
+  --font-noto-sans: var(--font-noto-sans);
+  --font-roboto: var(--font-roboto);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -42,6 +44,7 @@
   --color-cream: oklch(0.978 0.027 88.5);
   --color-peach-puff: oklch(0.909 0.088 65.2);
   --color-peru: oklch(0.649 0.113 59.4);
+  --color-light-peru: oklch(0.725 0.188 50.356);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -150,5 +153,8 @@
 }
 
 .heading-gradient {
-  @apply text-transparent bg-gradient-to-r from-peru via-sandy-brown to-peach-puff font-bold bg-clip-text;
+  @apply text-transparent bg-gradient-to-r from-peru via-sandy-brown to-peach-puff bg-clip-text;
+}
+.bg-gradient {
+  @apply bg-gradient-to-r from-peru to-light-peru;
 }
