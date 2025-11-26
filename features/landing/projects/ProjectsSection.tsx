@@ -45,14 +45,18 @@ export default function ProjectsSection() {
   return (
     <section className="w-full bg-gradient-to-b from-black via-neutral-950 to-neutral-900">
       <DefaultPad>
-        <div className="flex relative">
-          <div ref={containerRef} className="w-1/2 flex flex-col gap-8 items-end pr-20 py-[30dvh]">
+        <div className="flex relative w-full">
+          <div
+            ref={containerRef}
+            className="w-1/2 flex flex-col gap-8 items-end pr-20 pt-[30dvh] pb-[20dvh]"
+          >
             {projects.map((project, index) => (
               <div
                 key={`project-${index}`}
                 ref={(el) => {
                   cardRefs.current[index] = el;
                 }}
+                className="w-full"
               >
                 <ProjectCard project={project} />
               </div>
