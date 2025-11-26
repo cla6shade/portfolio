@@ -9,7 +9,8 @@ import {
   NavigationMenuList,
 } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Menu } from 'lucide-react';
+import { Github, Menu } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
@@ -21,12 +22,12 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 w-full">
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full font-roboto">
       <DefaultPad className="py-4 shadow-lg">
         <div className="flex items-center justify-between">
           <div className="text-xl font-playwrite font-thin">Cla6shade</div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-4">
             <NavigationMenu>
               <NavigationMenuList>
                 {navigationItems.map((item) => (
@@ -41,6 +42,14 @@ export default function Navigation() {
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
+            <a href="https://github.com/cla6shade" target="_blank" className="group">
+              <Button className="py-2 bg-light-peru rounded-full cursor-pointer hover:bg-orange-300">
+                Follow Me
+                <div className="px-2 rounded-full bg-white py-1 translate-x-3 flex items-center gap-2">
+                  35 <Github fill="#000000" />
+                </div>
+              </Button>
+            </a>
           </div>
 
           <div className="block md:hidden">
