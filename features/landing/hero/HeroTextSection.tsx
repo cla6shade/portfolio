@@ -6,7 +6,7 @@ export default function HeroTextSection() {
       <h1 className="text-5xl xl:text-6xl 2xl:text-7xl font-bold heading-gradient animate-fade-in-slide delay-0">
         CLA6SHADE
       </h1>
-      <div className="text-lg font-thin text-end mt-6 mb-8 gap-1 flex flex-col opacity-0 animate-fade-in-slide delay-200">
+      <div className="text-lg font-thin text-end mt-6 mb-8 gap-1 flex flex-col lg:text-2xl opacity-0 animate-fade-in-slide delay-200">
         <p>
           음악과 성취를 좋아하는 <span className="text-peach">프론트엔드 개발자</span>입니다
         </p>
@@ -22,11 +22,11 @@ export default function HeroTextSection() {
       >
         <Button
           className="relative px-10 py-2 overflow-hidden
-          text-base cursor-pointer text-background bg-gradient-to-r from-light-peru via-sandy-brown
-          to-peach-puff hover:rounded-full rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(205,133,63,0.6)] hover:scale-105"
+          text-base cursor-pointer text-background bg-gradient-to-r from-light-peru to-sandy-brown xl:px-12 xl:py-4
+          hover:rounded-full rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(205,133,63,0.6)] hover:scale-105"
         >
           <span className="relative z-10 font-roboto">Visit Github</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-peach via-sandy-brown to-light-peru opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-r  from-sandy-brown to-light-peru opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </Button>
       </a>
     </div>
