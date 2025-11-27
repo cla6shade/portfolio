@@ -16,17 +16,21 @@ interface Project {
 
 interface ProjectCardProps {
   project: Project;
+  isActive?: boolean;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, isActive = true }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
-  useHoverTilt(cardRef, { maxRotation: 10, translateZ: 20 });
+  useHoverTilt(
+    cardRef,
+    isActive ? { maxRotation: 10, translateZ: 20 } : { maxRotation: 0, translateZ: 0 },
+  );
 
   return (
     <div
       ref={cardRef}
-      className="relative rounded-xl shadow-2xl overflow-hidden h-[26rem] w-full transition-transform duration-200 ease-out preserve-3d"
+      className="relative rounded-xl shadow-2xl overflow-hidden h-[26rem] w-full max-w-lg transition-transform duration-200 ease-out preserve-3d"
     >
       {project.thumbnail && (
         <Image src={project.thumbnail} alt={project.title} className="object-cover" fill />
