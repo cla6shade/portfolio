@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 import DefaultPad from '@/components/container/DefaultPad';
 import {
   NavigationMenu,
@@ -12,8 +12,13 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { Github, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-export default function Navigation() {
+interface NavigationProps {
+  followersPromise: Promise<number>;
+}
+
+export default function Navigation({ followersPromise }: NavigationProps) {
   const [open, setOpen] = useState(false);
+  const followers = use(followersPromise);
 
   const navigationItems = [
     { href: '#about', label: 'About' },
@@ -43,10 +48,10 @@ export default function Navigation() {
               </NavigationMenuList>
             </NavigationMenu>
             <a href="https://github.com/cla6shade" target="_blank" className="group">
-              <Button className="py-2 bg-light-peru rounded-full cursor-pointer hover:bg-orange-300">
+              <Button className="py-2 bg-orange-300 rounded-full cursor-pointer hover:bg-peach-puff">
                 Follow Me
-                <div className="px-2 rounded-full bg-white py-1 translate-x-3 flex items-center gap-2">
-                  35 <Github fill="#000000" />
+                <div className="px-3 rounded-full bg-white py-1 translate-x-3 flex items-center gap-2">
+                  {followers ?? 35} <Github fill="#000000" />
                 </div>
               </Button>
             </a>

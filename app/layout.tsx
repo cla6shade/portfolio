@@ -3,6 +3,7 @@ import { Noto_Sans, Playwrite_US_Trad, Roboto } from 'next/font/google';
 import './globals.css';
 import { ReactNode } from 'react';
 import Navigation from '@/components/Navigation';
+import fetchFollowers from '@/utils/fetch-followers';
 const notoSans = Noto_Sans({
   variable: '--font-noto-sans',
   subsets: ['latin'],
@@ -31,7 +32,7 @@ export default function RootLayout({
       <body
         className={`${notoSans.variable} ${playWrite.variable} ${robotoSerif.variable} antialiased`}
       >
-        <Navigation />
+        <Navigation followersPromise={fetchFollowers()} />
         {children}
       </body>
     </html>
