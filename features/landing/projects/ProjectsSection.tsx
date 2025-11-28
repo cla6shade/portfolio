@@ -4,17 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { projects } from './constants';
 import ProjectCard from './ProjectCard';
 import ProjectDetail from './ProjectDetail';
-import DefaultPad from '@/components/container/DefaultPad';
-
-const calculateZTransform = (cardIndex: number, currentIndex: number): number => {
-  if (cardIndex === currentIndex) {
-    return 0;
-  } else if (cardIndex < currentIndex) {
-    return -100;
-  } else {
-    return -150;
-  }
-};
 
 export default function ProjectsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,36 +11,47 @@ export default function ProjectsSection() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
+    const calculateZTransform = (cardIndex: number, currentIndex: number): number => {
+      if (cardIndex === currentIndex) {
+        return 0;
+      } else if (cardIndex < currentIndex) {
+        return -100;
+      } else {
+        return -150;
+      }
+    };
+
     const calculateCurrentSection = (): number => {
       if (!containerRef.current) return 0;
 
       const scrollY = window.scrollY;
       const sectionStart = containerRef.current.offsetTop;
-      const relativeScroll = scrollY - sectionStart;
+      const sectionHeight = containerRef.current.offsetHeight - window.innerHeight;
 
-      const dvhInPixels = window.innerHeight / 100;
-      const totalScrollable = 100; // 200dvh - 100dvh
-
-      const firstCardRange = 15; // First card: 0-15dvh
-      const lastCardRange = 30; // Last card: 70-100dvh
-      const middleRange = totalScrollable - firstCardRange - lastCardRange; // 55dvh
+      const scrollRate = Math.max(
+        0,
+        Math.min(100, ((scrollY - sectionStart) / sectionHeight) * 100),
+      );
 
       const projectCount = projects.length;
 
+      const firstCardRange = 15;
+      const lastCardRange = 30;
+      const middleRange = 100 - firstCardRange - lastCardRange;
+
       // First card
-      if (relativeScroll < firstCardRange * dvhInPixels) return 0;
+      if (scrollRate < firstCardRange) return 0;
 
       // Last card
-      if (relativeScroll >= (totalScrollable - lastCardRange) * dvhInPixels) {
+      if (scrollRate >= 100 - lastCardRange) {
         return projectCount - 1;
       }
 
-      // Middle cards
       const middleCardCount = projectCount - 2;
       if (middleCardCount > 0) {
         const middleCardRange = middleRange / middleCardCount;
-        const middleScrollProgress = relativeScroll - firstCardRange * dvhInPixels;
-        const middleIndex = Math.floor(middleScrollProgress / (middleCardRange * dvhInPixels));
+        const middleScrollProgress = scrollRate - firstCardRange;
+        const middleIndex = Math.floor(middleScrollProgress / middleCardRange);
         return Math.min(1 + middleIndex, projectCount - 2);
       }
 
@@ -89,7 +89,7 @@ export default function ProjectsSection() {
   return (
     <section
       ref={containerRef}
-      className="w-full bg-gradient-to-b from-black via-neutral-950 to-neutral-900 relative h-[200dvh]"
+      className="w-full bg-gradient-to-b from-black via-neutral-950 to-neutral-900 relative h-[300dvh]"
     >
       <div className="sticky top-0 h-screen w-full px-16 md:px-20 lg:px-40 xl:px-60 z-10">
         <div className="flex h-full w-full">
