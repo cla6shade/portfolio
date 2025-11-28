@@ -2,11 +2,11 @@ import { Button } from '@/components/ui/button';
 
 export default function HeroTextSection() {
   return (
-    <div className="absolute w-1/2 h-full flex justify-center pb-10 items-end pr-16 xl:pr-32 flex-col z-10 font-noto-sans ">
+    <div className="absolute w-1/2 h-full flex justify-center pb-10 items-end pr-16 xl:pr-24 3xl:pr-32 flex-col z-10 font-noto-sans ">
       <h1 className="text-5xl xl:text-6xl 2xl:text-7xl font-bold heading-gradient animate-fade-in-slide delay-0">
         CLA6SHADE
       </h1>
-      <div className="text-lg font-thin text-end mt-6 mb-8 gap-1 flex flex-col lg:text-2xl opacity-0 animate-fade-in-slide delay-200">
+      <div className="text-lg font-thin text-end mt-6 mb-8 gap-1 flex flex-col lg:text-xl 3xl:text-2xl opacity-0 animate-fade-in-slide delay-200">
         <p>
           음악과 성취를 좋아하는 <span className="text-peach">프론트엔드 개발자</span>입니다
         </p>
