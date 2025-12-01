@@ -1,7 +1,8 @@
-import Soundfont from 'soundfont-player';
+import { SplendidGrandPiano } from 'smplr';
 
 export interface Player {
-  play: (note: string, time?: number, options?: { gain?: number; duration?: number }) => void;
+  start: (options: { note: string; velocity?: number; time?: number }) => void;
+  stop: (options: { note: string; time?: number }) => void;
 }
 
 let cachedPromise: Promise<Player> | null = null;
@@ -10,9 +11,18 @@ export function loadPiano(): Promise<Player> {
   if (cachedPromise) return cachedPromise;
 
   cachedPromise = (async () => {
+    const startTime = performance.now();
+
     const audioContext = new AudioContext();
-    const instrument = await Soundfont.instrument(audioContext, 'acoustic_grand_piano');
-    return instrument as Player;
+    const piano = new SplendidGrandPiano(audioContext);
+    await piano.load;
+
+    const endTime = performance.now();
+    const loadTime = endTime - startTime;
+
+    console.log(`Piano loaded in ${loadTime.toFixed(2)}ms`);
+
+    return piano as Player;
   })();
 
   return cachedPromise;
@@ -28,7 +38,7 @@ export function getNoteName(keyIndex: number): string {
 export function playPianoNote(player: Player, keyIndex: number): void {
   const noteName = getNoteName(keyIndex);
   try {
-    player.play(noteName);
+    player.start({ note: noteName, velocity: 80 });
   } catch (error) {
     console.error('Failed to play note:', noteName, error);
   }
