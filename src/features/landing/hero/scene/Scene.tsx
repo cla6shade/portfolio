@@ -6,6 +6,7 @@ import StageLight from '@/features/landing/hero/scene/StageLight';
 import Chair from '@/features/landing/hero/scene/Chair';
 import { useHero } from '@/features/landing/hero/HeroProvider';
 import Piano from '@/features/landing/hero/piano/Piano';
+import Flex from '@/components/container/Flex';
 
 import { useRef } from 'react';
 import {
@@ -35,7 +36,7 @@ export default function Scene({ frameloop }: { frameloop: Frameloop }) {
   const boxZ = PIANO_POSITION[2] + Math.cos(-PIANO_ROTATION[1]) * boxDistance;
 
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <Flex align="center" justify="center" className="w-full h-full">
       <div ref={canvasRef} className="w-full max-h-full aspect-video relative">
         <Canvas
           camera={{
@@ -57,6 +58,6 @@ export default function Scene({ frameloop }: { frameloop: Frameloop }) {
           </group>
         </Canvas>
       </div>
-    </div>
+    </Flex>
   );
 }

@@ -1,4 +1,4 @@
-import { SplendidGrandPiano } from 'smplr';
+import { LAYERS, SplendidGrandPiano } from 'smplr';
 
 export interface Player {
   start: (options: { note: string; velocity?: number; time?: number }) => void;

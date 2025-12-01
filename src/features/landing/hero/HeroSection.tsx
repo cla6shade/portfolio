@@ -7,6 +7,7 @@ import { MoveDown, Undo2 } from 'lucide-react';
 import HeroTextSection from '@/features/landing/hero/HeroTextSection';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import MusicController from '@/components/music-controller/MusicController';
+import Flex from '@/components/container/Flex';
 
 function HeroContent() {
   const { isPianoFocused, unfocusPiano } = useHero();
@@ -24,21 +25,21 @@ function HeroContent() {
       <Scene frameloop={shouldMountScene ? 'always' : 'never'} />
       <div ref={observerTargetRef} className="absolute inset-0 pointer-events-none" />
 
-      <div className="absolute bottom-6 w-full flex justify-center">
+      <Flex justify="center" className="absolute bottom-6 w-full">
         {!isPianoFocused ? (
           <div className="animate-bounce">
             <MoveDown />
           </div>
         ) : (
-          <div className="flex flex-col gap-4">
+          <Flex direction="col" className="gap-4">
             <MusicController />
             <Button variant="secondary" className="rounded-full" onClick={handleBackClick}>
               <Undo2 size={16} />
               Back
             </Button>
-          </div>
+          </Flex>
         )}
-      </div>
+      </Flex>
     </main>
   );
 }

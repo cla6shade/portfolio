@@ -1,12 +1,21 @@
 import { Button } from '@/components/ui/button';
+import Flex from '@/components/container/Flex';
 
 export default function HeroTextSection() {
   return (
-    <div className="absolute w-1/2 h-full flex justify-center pb-10 items-end pr-16 xl:pr-24 3xl:pr-32 flex-col z-10 font-noto-sans ">
+    <Flex
+      direction="col"
+      justify="center"
+      align="end"
+      className="absolute w-1/2 h-full pb-10 pr-16 xl:pr-24 3xl:pr-32 z-10 font-noto-sans"
+    >
       <h1 className="text-5xl xl:text-6xl 2xl:text-7xl font-bold heading-gradient animate-fade-in-slide delay-0">
         CLA6SHADE
       </h1>
-      <div className="text-lg font-thin text-end mt-6 mb-8 gap-1 flex flex-col lg:text-xl 3xl:text-2xl opacity-0 animate-fade-in-slide delay-200">
+      <Flex
+        direction="col"
+        className="text-lg font-thin text-end mt-6 mb-8 gap-1 lg:text-xl 3xl:text-2xl opacity-0 animate-fade-in-slide delay-200"
+      >
         <p>
           음악과 성취를 좋아하는 <span className="text-peach">프론트엔드 개발자</span>입니다
         </p>
@@ -14,7 +23,7 @@ export default function HeroTextSection() {
         <p>
           <span className="text-peach">기획에 한계를 두지 않고 구현하는 것</span>을 즐깁니다
         </p>
-      </div>
+      </Flex>
       <a
         href="https://github.com/cla6shade"
         target="_blank"
@@ -29,6 +38,6 @@ export default function HeroTextSection() {
           <div className="absolute inset-0 bg-gradient-to-r  from-sandy-brown to-light-peru opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </Button>
       </a>
-    </div>
+    </Flex>
   );
 }

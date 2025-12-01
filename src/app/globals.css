@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "./animate.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -53,25 +54,11 @@
   --animate-bounce: bounce 2s ease-in-out infinite;
   --animate-fade-in-slide: fade-in-slide 1s ease-out forwards;
 
-  @keyframes bounce {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-  }
 
-  @keyframes fade-in-slide {
-    0% {
-      opacity: 0;
-      transform: translateX(-2rem);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-lg-desktop: 1440px;
+
 }
 
 :root {

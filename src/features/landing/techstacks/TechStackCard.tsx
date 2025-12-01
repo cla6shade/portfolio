@@ -1,6 +1,7 @@
 import { type CSSProperties } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
+import Flex from '@/components/container/Flex';
 
 interface TechStackCardProps {
   color?: string;
@@ -158,11 +159,18 @@ export default function TechStackCard({
       }}
     >
       {icon && (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <Flex
+          align="center"
+          justify="center"
+          className="absolute inset-0 pointer-events-none"
+        >
           <Image src={icon} alt={title || ''} width={120} height={120} />
-        </div>
+        </Flex>
       )}
-      <div className="card__content absolute bottom-0 left-0 right-0 flex flex-col p-5 text-white z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/60 to-transparent">
+      <Flex
+        direction="col"
+        className="card__content absolute bottom-0 left-0 right-0 p-5 text-white z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/60 to-transparent"
+      >
         <h3
           className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}
         >
@@ -173,7 +181,7 @@ export default function TechStackCard({
         >
           {description}
         </p>
-      </div>
+      </Flex>
     </div>
   );
 }

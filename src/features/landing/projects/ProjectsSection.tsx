@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { projects } from './constants';
 import ProjectCard from './ProjectCard';
 import ProjectDetail from './ProjectDetail';
+import Flex from '@/components/container/Flex';
 
 export default function ProjectsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -92,31 +93,32 @@ export default function ProjectsSection() {
       className="w-full bg-gradient-to-b from-black via-neutral-950 to-neutral-900 relative h-[300dvh]"
     >
       <div className="sticky top-0 h-screen w-full px-16 md:px-20 lg:px-40 xl:px-60 z-10">
-        <div className="flex h-full w-full">
-          <div className="w-1/2 flex items-center justify-end pr-20 perspective-1000">
+        <Flex className="h-full w-full">
+          <Flex align="center" justify="end" className="w-1/2 pr-20 perspective-1000">
             <div className="w-full preserve-3d relative h-[26rem]">
               {projects.map((project, index) => (
-                <div
+                <Flex
                   key={`project-card-${index}`}
+                  justify="end"
+                  className="absolute inset-0 transition-all duration-500 ease-out w-full"
                   ref={(el) => {
                     cardRefs.current[index] = el;
                   }}
-                  className="absolute inset-0 transition-all duration-500 ease-out w-full flex justify-end"
                 >
                   <ProjectCard project={project} isActive={index === currentIndex} />
-                </div>
+                </Flex>
               ))}
             </div>
-          </div>
+          </Flex>
 
-          <div className="w-1/2 flex flex-col justify-center pl-20">
+          <Flex direction="col" justify="center" className="w-1/2 pl-20">
             <h2 className="text-xl mb-4 heading-gradient">PROJECTS</h2>
             <ProjectDetail
               project={projects[currentIndex]}
               key={`project-detail-${currentIndex}`}
             />
-          </div>
-        </div>
+          </Flex>
+        </Flex>
       </div>
     </section>
   );

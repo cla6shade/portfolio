@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 import useHoverTilt from '@/hooks/useHoverTilt';
+import Flex from '@/components/container/Flex';
 
 interface Project {
   title: string;
@@ -38,11 +39,11 @@ export default function ProjectCard({ project, isActive = true }: ProjectCardPro
 
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
 
-      <div className="relative h-full flex flex-col justify-end p-6">
+      <Flex direction="col" justify="end" className="relative h-full p-6">
         <h3 className="text-3xl font-bold mb-2 text-white">{project.title}</h3>
         <p className="text-gray-200 text-lg mb-4">{project.description}</p>
 
-        <div className="flex flex-wrap gap-2">
+        <Flex className="flex-wrap gap-2">
           {project.tags.map((tag, index) => (
             <span
               key={`project-tag-${index}`}
@@ -51,8 +52,8 @@ export default function ProjectCard({ project, isActive = true }: ProjectCardPro
               {tag}
             </span>
           ))}
-        </div>
-      </div>
+        </Flex>
+      </Flex>
     </div>
   );
 }
