@@ -6,5 +6,9 @@ interface DefaultPadProps {
 }
 
 export default function DefaultPad({ children, className = '' }: DefaultPadProps) {
-  return <div className={`px-16 md:px-20 lg:px-40 xl:px-60 ${className}`}>{children}</div>;
+  return (
+    <div className={`px-6 tablet:px-16 desktop:px-24 lg-desktop:px-32 ${className}`}>
+      {children}
+    </div>
+  );
 }
