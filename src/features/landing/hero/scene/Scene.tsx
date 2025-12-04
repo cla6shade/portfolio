@@ -50,7 +50,7 @@ export default function Scene({ frameloop }: { frameloop: Frameloop }) {
           }}
           onCreated={({ camera }) => setCameraRef(camera)}
         >
-          <StageLight position={[7, 13, 0]} target={[7, 4, 0]} />
+          <StageLight position={[8, 13, 0]} target={[8, 4, 0]} />
           <Floor />
           <Chair position={[boxX, boxY, boxZ]} rotation={PIANO_ROTATION} />
           <group onClick={handleGroupClick}>

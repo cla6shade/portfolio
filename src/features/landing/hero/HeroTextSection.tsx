@@ -8,7 +8,7 @@ export default function HeroTextSection() {
       justify="center"
       align="center"
       className="absolute w-full tablet:items-end tablet:w-1/2 h-full
-        tablet:pr-12 tablet:pb-10 desktop:pr-24 lg-desktop:pr-32 z-10 font-noto-sans"
+        tablet:pr-12 tablet:pb-10 desktop:pr-16 lg-desktop:pr-20 z-10 font-noto-sans"
     >
       <h1 className="text-5xl xl:text-6xl 2xl:text-7xl font-bold heading-gradient animate-fade-in-slide delay-0">
         CLAVISHADE
