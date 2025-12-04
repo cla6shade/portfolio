@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { projects } from './constants';
+import { projects } from './projects';
 import ProjectCard from './ProjectCard';
 import ProjectDetail from './ProjectDetail';
 import Flex from '@/components/container/Flex';
+import DefaultPad from '@/components/container/DefaultPad';
 
 export default function ProjectsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -89,18 +90,23 @@ export default function ProjectsSection() {
 
   return (
     <section
+      id="projects"
       ref={containerRef}
-      className="w-full bg-gradient-to-b from-black via-neutral-950 to-neutral-900 relative h-[300dvh]"
+      className="w-full bg-gradient-to-b from-neutral-950 to-neutral-900 relative h-[300dvh]"
     >
-      <div className="sticky top-0 h-screen w-full px-16 md:px-20 lg:px-40 xl:px-60 z-10">
-        <Flex className="h-full w-full">
-          <Flex align="center" justify="end" className="w-1/2 pr-20 perspective-1000">
-            <div className="w-full preserve-3d relative h-[26rem]">
+      <DefaultPad className="sticky top-0 h-screen w-full z-10">
+        <Flex className="h-full w-full tablet:flex-row" direction="col" justify="center">
+          <Flex
+            align="center"
+            justify="end"
+            className="w-full tablet:w-1/2 tablet:pr-8 lg-desktop:pr-20 py-8 perspective-1000"
+          >
+            <div className="w-full preserve-3d relative h-48 tablet:h-[26rem]">
               {projects.map((project, index) => (
                 <Flex
                   key={`project-card-${index}`}
-                  justify="end"
-                  className="absolute inset-0 transition-all duration-500 ease-out w-full"
+                  justify="center"
+                  className="absolute inset-0 tablet:justify-end transition-all duration-500 ease-out w-full"
                   ref={(el) => {
                     cardRefs.current[index] = el;
                   }}
@@ -111,7 +117,11 @@ export default function ProjectsSection() {
             </div>
           </Flex>
 
-          <Flex direction="col" justify="center" className="w-1/2 pl-20">
+          <Flex
+            direction="col"
+            justify="center"
+            className="w-full tablet:w-1/2 tablet:pl-8 lg-desktop:pl-20"
+          >
             <h2 className="text-xl mb-4 heading-gradient">PROJECTS</h2>
             <ProjectDetail
               project={projects[currentIndex]}
@@ -119,7 +129,7 @@ export default function ProjectsSection() {
             />
           </Flex>
         </Flex>
-      </div>
+      </DefaultPad>
     </section>
   );
 }
