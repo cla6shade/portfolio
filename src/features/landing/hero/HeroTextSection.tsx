@@ -6,20 +6,21 @@ export default function HeroTextSection() {
     <Flex
       direction="col"
       justify="center"
-      align="end"
-      className="absolute w-1/2 h-full pb-10 pr-16 xl:pr-24 3xl:pr-32 z-10 font-noto-sans"
+      align="center"
+      className="absolute w-full tablet:items-end tablet:w-1/2 h-full
+        tablet:pr-12 tablet:pb-10 desktop:pr-24 lg-desktop:pr-32 z-10 font-noto-sans"
     >
       <h1 className="text-5xl xl:text-6xl 2xl:text-7xl font-bold heading-gradient animate-fade-in-slide delay-0">
-        CLA6SHADE
+        CLAVISHADE
       </h1>
       <Flex
         direction="col"
-        className="text-lg font-thin text-end mt-6 mb-8 gap-1 lg:text-xl 3xl:text-2xl opacity-0 animate-fade-in-slide delay-200"
+        className="desktop:text-lg lg-desktop:text-2xl font-thin text-end mt-6 mb-8 gap-1 opacity-0 animate-fade-in-slide delay-200"
       >
         <p>
           음악과 성취를 좋아하는 <span className="text-peach">프론트엔드 개발자</span>입니다
         </p>
-        <p>고객의 가치를 코드에 담는 우수한 개발자를 목표로 합니다</p>
+        <p>고객의 가치를 코드에 담는 개발자가 되고자 합니다</p>
         <p>
           <span className="text-peach">기획에 한계를 두지 않고 구현하는 것</span>을 즐깁니다
         </p>

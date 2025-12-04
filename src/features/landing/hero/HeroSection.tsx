@@ -19,7 +19,7 @@ function HeroContent() {
   };
 
   return (
-    <main className="w-full max-h-dvh aspect-video relative">
+    <main className="w-full h-[40rem] max-h-dvh tablet:h-auto tablet:aspect-video relative">
       {!isPianoFocused && <HeroTextSection />}
 
       <Scene frameloop={shouldMountScene ? 'always' : 'never'} />
