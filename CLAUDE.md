@@ -223,6 +223,44 @@ Tailwind CSS v4는 PostCSS 기반 설정을 사용합니다.
 - CSS 변수로 테마 관리
 - `.dark` 클래스로 다크 모드 전환
 
+**프로젝트 색상 팔레트**:
+
+이 프로젝트는 따뜻한 톤의 색상 팔레트를 사용합니다. app/globals.css에 정의된 색상들입니다:
+
+```css
+@theme inline {
+  --color-sandy-brown: oklch(0.756 0.117 57.5);
+  --color-peach: oklch(0.903 0.079 68.8);
+  --color-cream: oklch(0.978 0.027 88.5);
+  --color-peach-puff: oklch(0.909 0.088 65.2);
+  --color-peru: oklch(0.649 0.113 59.4);
+  --color-light-peru: oklch(0.725 0.188 50.356);
+}
+```
+
+**색상 사용 규칙**:
+1. **항상 Tailwind 유틸리티 클래스를 우선 사용**
+   ```typescript
+   // [올바른 예시] Tailwind 유틸리티 클래스 사용
+   <div className="text-sandy-brown border-peru bg-cream">
+   <Award className="text-light-peru" />
+   <p className="group-hover:text-peach transition-colors">
+   ```
+
+2. **직접 oklch 값 사용은 Tailwind로 표현 불가능한 경우만**
+   ```typescript
+   // [예외] 동적 값이나 특수한 경우에만 직접 사용
+   <div style={{ color: 'oklch(0.756 0.117 57.5)' }}>
+   ```
+
+**색상 의미**:
+- `sandy-brown`: 주요 강조 색상, 아이콘, 보더
+- `peach`: 호버 효과, 부드러운 강조
+- `cream`: 밝은 배경, 하이라이트
+- `peach-puff`: 서브 강조 색상
+- `peru`: 중간 톤 강조 색상
+- `light-peru`: 밝은 강조 색상, 아이콘
+
 ### 6. shadcn/ui 활용
 
 **필요한 경우 shadcn의 컴포넌트를 적극 활용.**
@@ -841,7 +879,7 @@ gsap.to(element, {
 
 - **컴포넌트**: 한 파일당 하나의 default export 컴포넌트
 - **타입**: 같은 파일 상단에 interface/type 선언
-- **상수**: `constants.ts` 파일로 분리
+- **상수**: `projects.ts` 파일로 분리
 - **유틸리티**: `lib/` 디렉토리에 배치
 - **훅**: `hooks/` 디렉토리에 배치
 
