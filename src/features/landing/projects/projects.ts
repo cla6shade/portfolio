@@ -1,4 +1,14 @@
-export const projects = [
+export interface Project {
+  title: string;
+  description: string;
+  thumbnail?: string;
+  tags: string[];
+  details: string[];
+  link?: string;
+  github?: string;
+}
+
+export const projects: Project[] = [
   {
     title: 'ExitMate',
     description: '자영업자를 위한 지원사업 안내 및 신청 보조',
