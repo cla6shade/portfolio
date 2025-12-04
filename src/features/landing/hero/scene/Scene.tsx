@@ -36,7 +36,7 @@ export default function Scene({ frameloop }: { frameloop: Frameloop }) {
   const boxZ = PIANO_POSITION[2] + Math.cos(-PIANO_ROTATION[1]) * boxDistance;
 
   return (
-    <Flex align="center" justify="center" className="w-full h-full">
+    <Flex align="center" justify="center" className="w-full h-full hidden tablet:flex">
       <div ref={canvasRef} className="w-full max-h-full aspect-video relative">
         <Canvas
           camera={{
