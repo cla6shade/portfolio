@@ -1,13 +1,8 @@
 import { SplendidGrandPiano } from 'smplr';
 
-export interface Player {
-  start: (options: { note: string; velocity?: number; time?: number }) => void;
-  stop: (options: { note: string; time?: number }) => void;
-}
+let cachedPromise: Promise<SplendidGrandPiano> | null = null;
 
-let cachedPromise: Promise<Player> | null = null;
-
-export function loadPiano(): Promise<Player> {
+export function loadPianoSound(): Promise<SplendidGrandPiano> {
   if (cachedPromise) return cachedPromise;
 
   cachedPromise = (async () => {
@@ -22,7 +17,7 @@ export function loadPiano(): Promise<Player> {
 
     console.log(`Piano loaded in ${loadTime.toFixed(2)}ms`);
 
-    return piano as Player;
+    return piano;
   })();
 
   return cachedPromise;
@@ -35,7 +30,7 @@ export function getNoteName(keyIndex: number): string {
   return `${noteNames[noteInOctave]}${octave}`;
 }
 
-export function playPianoNote(player: Player, keyIndex: number): void {
+export function playPianoNote(player: SplendidGrandPiano, keyIndex: number): void {
   const noteName = getNoteName(keyIndex);
   try {
     player.start({ note: noteName, velocity: 80 });
