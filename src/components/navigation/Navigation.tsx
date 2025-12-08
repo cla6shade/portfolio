@@ -31,8 +31,8 @@ export default function Navigation({ followersPromise }: NavigationProps) {
         <div className="flex items-center justify-between">
           <div className="text-xl font-playwrite font-thin">Clavishade</div>
 
-          <div className="hidden md:flex items-center gap-4">
-            <NavigationMenu>
+          <div className="hidden md:flex">
+            <NavigationMenu className="gap-4">
               <NavigationMenuList>
                 {navigationItems.map((item) => (
                   <NavigationMenuItem key={`navigation-item-${item.href}`}>
@@ -45,6 +45,11 @@ export default function Navigation({ followersPromise }: NavigationProps) {
                   </NavigationMenuItem>
                 ))}
               </NavigationMenuList>
+              <GithubButton>
+                <Suspense fallback={<>33</>}>
+                  <FollowerCount followersPromise={followersPromise} />
+                </Suspense>
+              </GithubButton>
             </NavigationMenu>
           </div>
 
@@ -60,24 +65,23 @@ export default function Navigation({ followersPromise }: NavigationProps) {
               </SheetTrigger>
               <SheetContent className="bg-neutral-950 border-l border-white/10 w-[280px]">
                 <div className="flex flex-col gap-8 pt-8">
-                  <nav className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2">
                     {navigationItems.map((item) => (
                       <a
                         key={`mobile-nav-${item.href}`}
                         href={item.href}
-                        className="text-lg font-roboto text-white hover:text-sandy-brown hover:bg-white/5 transition-all py-3 px-6 rounded-lg"
+                        className="text-base font-roboto text-white hover:text-sandy-brown hover:bg-white/5 transition-all py-3 px-6 rounded-lg"
                         onClick={() => setOpen(false)}
                       >
                         {item.label}
                       </a>
                     ))}
-                  </nav>
-
-                  <GithubButton>
-                    <Suspense fallback={<>33</>}>
-                      <FollowerCount followersPromise={followersPromise} />
-                    </Suspense>
-                  </GithubButton>
+                    <GithubButton variant="sheet">
+                      <Suspense fallback={<>33</>}>
+                        <FollowerCount followersPromise={followersPromise} />
+                      </Suspense>
+                    </GithubButton>
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>
