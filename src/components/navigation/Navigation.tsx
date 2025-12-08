@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useState } from 'react';
+import { useState, Suspense } from 'react';
 import DefaultPad from '@/components/container/DefaultPad';
 import {
   NavigationMenu,
@@ -9,8 +9,9 @@ import {
   NavigationMenuList,
 } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Github, Menu } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Menu } from 'lucide-react';
+import GithubButton from '@/components/navigation/GithubButton';
+import FollowerCount from '@/components/navigation/FollowerCount';
 
 interface NavigationProps {
   followersPromise: Promise<number>;
@@ -18,7 +19,6 @@ interface NavigationProps {
 
 export default function Navigation({ followersPromise }: NavigationProps) {
   const [open, setOpen] = useState(false);
-  const followers = use(followersPromise);
 
   const navigationItems = [
     { href: '#basic-info', label: 'Basic Info' },
@@ -46,14 +46,6 @@ export default function Navigation({ followersPromise }: NavigationProps) {
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
-            <a href="https://github.com/cla6shade" target="_blank" className="group">
-              <Button className="py-2 bg-orange-300 rounded-full cursor-pointer hover:bg-peach-puff">
-                Follow Me
-                <div className="px-3 rounded-full bg-white py-1 translate-x-3 flex items-center gap-2">
-                  {followers ?? 35} <Github fill="#000000" />
-                </div>
-              </Button>
-            </a>
           </div>
 
           <div className="block md:hidden">
@@ -81,14 +73,11 @@ export default function Navigation({ followersPromise }: NavigationProps) {
                     ))}
                   </nav>
 
-                  <a href="https://github.com/cla6shade" target="_blank" className="group px-4">
-                    <Button className="py-2 bg-orange-300 rounded-full cursor-pointer hover:bg-peach-puff w-full">
-                      Follow Me On Github
-                      <div className="px-3 rounded-full bg-white py-1 translate-x-3 flex items-center gap-2">
-                        {followers ?? 35} <Github fill="#000000" />
-                      </div>
-                    </Button>
-                  </a>
+                  <GithubButton>
+                    <Suspense fallback={<>33</>}>
+                      <FollowerCount followersPromise={followersPromise} />
+                    </Suspense>
+                  </GithubButton>
                 </div>
               </SheetContent>
             </Sheet>
