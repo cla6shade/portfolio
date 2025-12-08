@@ -6,7 +6,6 @@ import Scene from '@/features/landing/hero/scene/Scene';
 import { MoveDown, Undo2 } from 'lucide-react';
 import HeroTextSection from '@/features/landing/hero/HeroTextSection';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import MusicController from '@/components/music-controller/MusicController';
 import Flex from '@/components/container/Flex';
 
 function HeroContent() {
@@ -32,7 +31,6 @@ function HeroContent() {
           </div>
         ) : (
           <Flex direction="col" className="gap-4">
-            <MusicController />
             <Button variant="secondary" className="rounded-full" onClick={handleBackClick}>
               <Undo2 size={16} />
               Back
