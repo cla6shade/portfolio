@@ -1,7 +1,7 @@
-import { Suspense, use, useMemo } from 'react';
-import { loadPiano } from '@/features/landing/hero/piano/pianoSound';
+import { Suspense } from 'react';
 import PianoModel from '@/features/landing/hero/piano/PianoModel';
 import PianoFallback from '@/features/landing/hero/piano/PianoFallback';
+import PianoProvider from '@/features/landing/hero/piano/provider/PianoProvider';
 
 export type PianoProps = {
   isSoundEnabled: boolean;
@@ -16,15 +16,11 @@ export default function Piano({ isSoundEnabled }: PianoProps) {
         </>
       }
     >
-      <SoundBoundPiano />
+      <PianoProvider>
+        <PianoModel />
+      </PianoProvider>
     </Suspense>
   ) : (
     <PianoModel />
   );
-}
-
-function SoundBoundPiano() {
-  const pianoPromise = useMemo(() => loadPiano(), []);
-  const player = use(pianoPromise);
-  return <PianoModel player={player} />;
 }
