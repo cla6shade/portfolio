@@ -5,12 +5,12 @@ import { Edges } from '@react-three/drei';
 import { useHero } from '@/features/landing/hero/HeroProvider';
 
 export interface PianoKeyProps {
-  keyIndex: number;
+  note: string;
   variant: 'black' | 'white';
   x: number;
-  onKeyPress: (keyIndex: number) => void;
+  onKeyPress: (note: string) => void;
 }
-export default function PianoKey({ keyIndex, x, onKeyPress, variant }: PianoKeyProps) {
+export default function PianoKey({ note, x, onKeyPress, variant }: PianoKeyProps) {
   const [pressed, setPressed] = useState(false);
 
   const { isPianoFocused } = useHero();
@@ -30,7 +30,7 @@ export default function PianoKey({ keyIndex, x, onKeyPress, variant }: PianoKeyP
     if (!isPianoFocused) return;
     e.stopPropagation();
     setPressed(true);
-    onKeyPress(keyIndex);
+    onKeyPress(note);
   };
 
   const handlePointerUp = () => {
