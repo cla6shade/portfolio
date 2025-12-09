@@ -6,6 +6,7 @@ import { defineConfig } from 'vitest/config';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 
 import { playwright } from '@vitest/browser-playwright';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
@@ -14,6 +15,14 @@ const dirname =
 export default defineConfig({
   test: {
     projects: [
+      {
+        plugins: [tsconfigPaths()],
+        test: {
+          name: 'unit',
+          root: './src',
+          environment: 'node'
+        }
+      },
       {
         extends: true,
         plugins: [
