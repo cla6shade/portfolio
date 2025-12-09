@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Utils } from '@/features/landing/hero/piano/player/midiPlayer/utils';
+import Utils from '@/features/landing/hero/piano/midi/Utils';
 
 describe('Utils', (): void => {
   describe('byteToHex', (): void => {

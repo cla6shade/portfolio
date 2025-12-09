@@ -1,28 +1,6 @@
 import Constants from './constants';
 import Utils from './Utils';
-
-export interface MIDIEvent {
-  track: number;
-  delta: number;
-  tick: number;
-  byteIndex: number;
-  name: string;
-  running?: boolean;
-  noteNumber?: number;
-  noteName?: string;
-  velocity?: number;
-  channel?: number;
-  string?: string;
-  data?: Uint8Array<ArrayBuffer> | Array<number> | number;
-  tempo?: number;
-  timeSignature?: string;
-  keySignature?: string;
-  note?: string;
-  pressure?: number;
-  number?: number;
-  value?: number;
-}
-
+import { MIDIEvent } from '@/features/landing/hero/piano/midi/types';
 /**
  * Class representing a track.  Contains methods for parsing events and keeping track of pointer.
  */

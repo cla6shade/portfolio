@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect, type ChangeEvent } from 'react';
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import Player from '@/features/landing/hero/piano/midi/Player';
-import { type MIDIEvent } from '@/features/landing/hero/piano/midi/Track';
+import {
+  MIDIEvent,
+  PlayerEvent,
+} from '@/features/landing/hero/piano/midi/types';
 
 function MIDIPlayerDemo() {
   const playerRef = useRef<typeof Player.prototype | null>(null);
@@ -91,15 +94,16 @@ function MIDIPlayerDemo() {
     };
 
     const handleMidiEvent = (
-      event: MIDIEvent | Record<string, unknown> | typeof Player.prototype,
+      event: MIDIEvent | PlayerEvent,
     ) => {
       const midiEvent = event as MIDIEvent;
       addEventToList(midiEvent);
     };
 
-    const handlePlaying = (data: MIDIEvent | Record<string, unknown> | typeof Player.prototype) => {
-      const playingData = data as Record<string, unknown>;
-      const tick = playingData.tick as number;
+    const handlePlaying = (data: MIDIEvent | PlayerEvent) => {
+      if(data.name !== 'Playing')
+        return;
+      const tick = data.tick as number;
       updateProgress(tick);
     };
 

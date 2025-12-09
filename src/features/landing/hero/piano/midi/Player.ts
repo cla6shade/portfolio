@@ -1,8 +1,7 @@
 import Constants from './constants';
 import Track from './Track';
 import Utils from './Utils';
-import { type MIDIEvent } from './Track';
-import { PlayerEvent } from '@/features/landing/hero/piano/midi/types';
+import { PlayerEvent, MIDIEvent } from '@/features/landing/hero/piano/midi/types';
 
 // Polyfill Uint8Array.forEach: Doesn't exist on Safari <10
 if (!Uint8Array.prototype.forEach) {
