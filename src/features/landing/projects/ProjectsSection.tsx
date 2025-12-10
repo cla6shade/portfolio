@@ -99,7 +99,7 @@ export default function ProjectsSection() {
           <Flex
             align="center"
             justify="end"
-            className="w-full tablet:w-1/2 tablet:pr-8 lg-desktop:pr-20 py-8 perspective-1000"
+            className="w-full tablet:w-1/2 tablet:pr-8 lg-desktop:pr-16 py-8 perspective-1000"
           >
             <div className="w-full preserve-3d relative h-48 tablet:h-[26rem]">
               {projects.map((project, index) => (
@@ -120,7 +120,7 @@ export default function ProjectsSection() {
           <Flex
             direction="col"
             justify="center"
-            className="w-full tablet:w-1/2 tablet:pl-8 lg-desktop:pl-20"
+            className="w-full tablet:w-1/2 tablet:pl-8 lg-desktop:pl-16"
           >
             <h2 className="text-xl mb-4 heading-gradient">PROJECTS</h2>
             <ProjectDetail
