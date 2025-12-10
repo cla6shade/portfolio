@@ -45,7 +45,8 @@ export const projects: Project[] = [
     thumbnail: '/projects/ditto.svg',
     details: [
       '출석 관리·과제 제출·스터디원 관리 기능을 통합 제공하고 스터디 간 경쟁 요소 도입',
-      '디자인 시스템 도입, 데이터 페칭 및 렌더링 최적화',
+      '디자인 시스템 도입으로 작업 생산성 향상 및 일관된 디자인 적용',
+      'useSuspenseQueries를 이용한 data waterfall 방지',
       '프론트엔드 개발자로 50% 기여',
     ],
   },
@@ -57,9 +58,8 @@ export const projects: Project[] = [
     thumbnail: '/projects/lessonmanager.svg',
     details: [
       '부산의 피아노학원 "피아노투게더"를 위한 학원 관리 시스템',
-      '3개 지점에서 운영 중, 약 200명의 월간 활성 사용자',
       '모바일 레이아웃 디자인 및 구현, 선생님 관리 및 레슨 예약정보 관리, 결제 기능 구현',
-      '현재 Next.js로 마이그레이션 작업 중',
+      'Composite Index 도입과 Denormalization으로 통계기능 쿼리 최적화 (>1m ⭢ <1s)',
       '프론트엔드 50%, 백엔드 50% 기여',
     ],
   },

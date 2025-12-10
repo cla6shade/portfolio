@@ -137,7 +137,7 @@ export default function BasicInfoSection() {
               />
               <InfoItem
                 content="부산대학교 알고리즘대회 PNU Coderace 정보컴퓨터공학부장상"
-                description="약 150명 중 6위 (2023.08)"
+                description="약 150명 중 6위 (2022.08)"
                 className="group-hover:text-peach-puff"
               />
             </InfoSection>
