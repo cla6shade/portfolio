@@ -35,7 +35,6 @@ export default function RootLayout({
       <body
         className={`${notoSans.variable} ${playWrite.variable} ${robotoSerif.variable} antialiased`}
       >
-        <Navigation followersPromise={fetchFollowers()} />
         {children}
         <Analytics />
         <SpeedInsights />
