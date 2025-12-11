@@ -1,55 +1,62 @@
 'use client';
 
-import { useState, Suspense } from 'react';
+import { useState, type ReactNode } from 'react';
 import DefaultPad from '@/components/container/DefaultPad';
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
-import GithubButton from '@/components/navigation/GithubButton';
-import FollowerCount from '@/components/navigation/FollowerCount';
+import Link from 'next/link';
 
-interface NavigationProps {
-  followersPromise: Promise<number>;
+interface NavigationItem {
+  href: string;
+  label: string;
 }
 
-export default function Navigation({ followersPromise }: NavigationProps) {
+interface NavigationProps {
+  items: NavigationItem[];
+  navChild?: ReactNode;
+  sheetChild?: ReactNode;
+  className?: string;
+}
+
+export default function Navigation({
+  items,
+  navChild,
+  sheetChild,
+  className = '',
+}: NavigationProps) {
   const [open, setOpen] = useState(false);
 
-  const navigationItems = [
-    { href: '#basic-info', label: 'Basic Info' },
-    { href: '#projects', label: 'Projects' },
-  ];
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 w-full font-roboto">
+    <nav className={`fixed top-0 left-0 right-0 z-50 w-full font-roboto ${className}`}>
       <DefaultPad className="py-4 shadow-lg">
         <div className="flex items-center justify-between">
-          <div className="text-xl font-playwrite font-thin">Clavishade</div>
+          <Link
+            className="text-xl font-playwrite font-thin hover:text-light-peru transition-colors duration-200"
+            href="/"
+          >
+            Clavishade
+          </Link>
 
           <div className="hidden md:flex">
             <NavigationMenu className="gap-4">
               <NavigationMenuList>
-                {navigationItems.map((item) => (
+                {items.map((item) => (
                   <NavigationMenuItem key={`navigation-item-${item.href}`}>
-                    <NavigationMenuLink
+                    <a
                       href={item.href}
-                      className="px-4 hover:bg-[rgba(255,255,255,.1)]"
+                      className="px-4 py-2 relative inline-block transition-colors duration-300 hover:text-sandy-brown after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-sandy-brown after:transition-all after:duration-300 hover:after:w-full"
                     >
                       {item.label}
-                    </NavigationMenuLink>
+                    </a>
                   </NavigationMenuItem>
                 ))}
               </NavigationMenuList>
-              <GithubButton>
-                <Suspense fallback={<>33</>}>
-                  <FollowerCount followersPromise={followersPromise} />
-                </Suspense>
-              </GithubButton>
+              {navChild}
             </NavigationMenu>
           </div>
 
@@ -66,7 +73,7 @@ export default function Navigation({ followersPromise }: NavigationProps) {
               <SheetContent className="bg-neutral-950 border-l border-white/10 w-[280px]">
                 <div className="flex flex-col gap-8 pt-8">
                   <div className="flex flex-col gap-2">
-                    {navigationItems.map((item) => (
+                    {items.map((item) => (
                       <a
                         key={`mobile-nav-${item.href}`}
                         href={item.href}
@@ -76,11 +83,7 @@ export default function Navigation({ followersPromise }: NavigationProps) {
                         {item.label}
                       </a>
                     ))}
-                    <GithubButton variant="sheet">
-                      <Suspense fallback={<>33</>}>
-                        <FollowerCount followersPromise={followersPromise} />
-                      </Suspense>
-                    </GithubButton>
+                    {sheetChild}
                   </div>
                 </div>
               </SheetContent>

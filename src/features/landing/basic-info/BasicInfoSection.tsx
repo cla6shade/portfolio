@@ -72,7 +72,12 @@ export default function BasicInfoSection() {
               />
             </InfoSection>
 
-            <div className={cn('border-l-4 border-sandy-brown pl-6 opacity-0', isIntersecting && 'animate-fade-in-slide [animation-delay:400ms]')}>
+            <div
+              className={cn(
+                'border-l-4 border-sandy-brown pl-6 opacity-0',
+                isIntersecting && 'animate-fade-in-slide [animation-delay:400ms]',
+              )}
+            >
               <Flex align="center" className="gap-3 mb-6">
                 <Code className="text-sandy-brown" size={28} />
                 <h4 className="text-2xl tablet:text-3xl font-bold text-white">Tech Stacks</h4>
