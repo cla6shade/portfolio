@@ -37,7 +37,7 @@ export default function ProjectsSection() {
 
       const projectCount = projects.length;
 
-      const firstCardRange = 15;
+      const firstCardRange = 30;
       const lastCardRange = 30;
       const middleRange = 100 - firstCardRange - lastCardRange;
 
@@ -92,7 +92,7 @@ export default function ProjectsSection() {
     <section
       id="projects"
       ref={containerRef}
-      className="w-full bg-gradient-to-b from-neutral-950 to-neutral-900 relative h-[300dvh]"
+      className="w-full bg-gradient-to-b from-neutral-950 to-neutral-900 relative h-[350dvh]"
     >
       <DefaultPad className="sticky top-0 h-screen w-full z-10">
         <Flex className="h-full w-full tablet:flex-row" direction="col" justify="center">
