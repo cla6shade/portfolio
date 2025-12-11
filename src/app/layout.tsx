@@ -4,8 +4,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { ReactNode } from 'react';
-import Navigation from '@/components/navigation/Navigation';
-import fetchFollowers from '@/utils/fetch-followers';
 
 const notoSans = Noto_Sans({
   variable: '--font-noto-sans',
