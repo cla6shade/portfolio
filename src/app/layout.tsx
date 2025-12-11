@@ -29,7 +29,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="ko" className="dark">
+    <html lang="ko" suppressHydrationWarning>
       <body
         className={`${notoSans.variable} ${playWrite.variable} ${robotoSerif.variable} antialiased`}
       >
