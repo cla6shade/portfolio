@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next';
+import createMDX from '@next/mdx';
 
 const nextConfig: NextConfig = {
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   images: {
     remotePatterns: [
       {
@@ -11,9 +13,10 @@ const nextConfig: NextConfig = {
   },
 };
 
+const withMDX = createMDX({});
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const bundleAnalyzerWrapper = require('@next/bundle-analyzer')({
+const withAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-export default bundleAnalyzerWrapper(nextConfig);
+export default withAnalyzer(withMDX(nextConfig));
