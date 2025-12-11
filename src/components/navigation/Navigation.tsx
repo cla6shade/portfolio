@@ -32,7 +32,9 @@ export default function Navigation({
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 w-full font-roboto ${className}`}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 w-full font-roboto backdrop-blur-sm ${className}`}
+    >
       <DefaultPad className="py-4 shadow-lg">
         <div className="flex items-center justify-between">
           <Link
