@@ -6,10 +6,10 @@ export default async function BlogPage() {
   const blogPosts = await getAllBlogPosts();
 
   return (
-    <DefaultPad className="py-16">
+    <DefaultPad className="py-16 font-noto-serif">
       <div className="max-w-4xl mx-auto">
         <header className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-peru">Blog</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-peru">Clavis.log</h1>
           <p className="text-lg text-muted-foreground">
             개발하면서 배운 것들과 생각들을 기록합니다.
           </p>

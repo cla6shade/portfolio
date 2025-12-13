@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
-import { Noto_Sans, Playwrite_US_Trad, Roboto } from 'next/font/google';
+import { Noto_Sans, Noto_Serif_KR, Playwrite_US_Trad, Roboto } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { ReactNode } from 'react';
+
+const notoSerif = Noto_Serif_KR({
+  variable: '--font-noto-serif',
+  subsets: ['latin'],
+});
 
 const notoSans = Noto_Sans({
   variable: '--font-noto-sans',
@@ -31,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <body
-        className={`${notoSans.variable} ${playWrite.variable} ${robotoSerif.variable} antialiased`}
+        className={`${notoSans.variable} ${playWrite.variable} ${robotoSerif.variable} ${notoSerif.variable} antialiased`}
       >
         {children}
         <Analytics />
