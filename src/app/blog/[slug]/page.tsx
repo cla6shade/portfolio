@@ -1,10 +1,36 @@
 import DefaultPad from '@/components/container/DefaultPad';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Calendar, User } from 'lucide-react';
 import Link from 'next/link';
+import {
+  BlogMetadata,
+  getAllBlogPosts,
+} from '@/features/blog/mdx';
+import { Badge } from '@/components/ui/badge';
+
+export async function generateStaticParams() {
+  const posts = await getAllBlogPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const { default: Post } = await import(`@/contents/${slug}.mdx`);
+
+  const { default: Post, metadata } = await import(`@/contents/${slug}.mdx`);
+  const {
+    title,
+    description,
+    date,
+    author,
+    tags,
+  } = metadata as BlogMetadata;
+
+  const formattedDate = new Date(date).toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
   return (
     <DefaultPad className="py-16">
@@ -17,7 +43,39 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           Back to Blog
         </Link>
 
-        <article className="prose prose-lg max-w-none prose-headings:heading-gradient prose-a:text-sandy-brown prose-a:no-underline hover:prose-a:text-peru prose-strong:text-foreground prose-code:text-peru prose-code:bg-cream prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-neutral-950 prose-pre:text-foreground prose-blockquote:border-l-sandy-brown prose-blockquote:text-muted-foreground">
+        <header className="mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-peru">
+            {title}
+          </h1>
+
+          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
+            <div className="flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              <time dateTime={date}>{formattedDate}</time>
+            </div>
+            <div className="flex items-center gap-2">
+              <User className="w-4 h-4" />
+              <span>{author}</span>
+            </div>
+          </div>
+
+          <p className="text-lg text-muted-foreground mb-6">{description}</p>
+
+          {tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <Badge
+                  key={`tag-${tag}`}
+                  variant="secondary"
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          )}
+        </header>
+
+        <article>
           <Post />
         </article>
       </div>
