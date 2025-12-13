@@ -1,4 +1,5 @@
 import Navigation from '@/components/navigation/Navigation';
+import ThemeToggle from '@/features/blog/ThemeToggle';
 
 const navigationItems = [
   { href: '/', label: 'Home' },
@@ -6,5 +7,11 @@ const navigationItems = [
 ];
 
 export default function BlogNavigation() {
-  return <Navigation items={navigationItems} />;
+  return (
+    <Navigation
+      items={navigationItems}
+      navChild={<ThemeToggle />}
+      sheetChild={<ThemeToggle />}
+    />
+  );
 }
