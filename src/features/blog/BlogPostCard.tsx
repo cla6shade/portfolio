@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Calendar, Tag } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 interface BlogPostCardProps {
   slug: string;
@@ -32,12 +33,12 @@ export default function BlogPostCard({ slug, title, description, date, tags }: B
         <div className="flex items-center gap-2 flex-wrap">
           <Tag className="w-4 h-4 text-sandy-brown" />
           {tags.map((tag, index) => (
-            <span
+            <Badge
               key={`blog-tag-${index}`}
-              className="text-xs px-2 py-1 rounded bg-cream text-peru"
+              variant="secondary"
             >
               {tag}
-            </span>
+            </Badge>
           ))}
         </div>
       )}
