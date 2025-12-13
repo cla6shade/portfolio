@@ -1,25 +1,10 @@
 import DefaultPad from '@/components/container/DefaultPad';
 import BlogPostCard from '@/features/blog/BlogPostCard';
+import { getAllBlogPosts } from '@/features/blog/mdx';
 
-interface BlogPost {
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  tags: string[];
-}
+export default async function BlogPage() {
+  const blogPosts = await getAllBlogPosts();
 
-const blogPosts: BlogPost[] = [
-  {
-    slug: 'example',
-    title: 'Example MDX Content',
-    description: 'This is an example MDX file demonstrating various markdown and MDX features',
-    date: '2025-12-11',
-    tags: ['example', 'mdx', 'demo'],
-  },
-];
-
-export default function BlogPage() {
   return (
     <DefaultPad className="py-16">
       <div className="max-w-4xl mx-auto">
@@ -35,10 +20,10 @@ export default function BlogPage() {
             <BlogPostCard
               key={`blog-post-${post.slug}`}
               slug={post.slug}
-              title={post.title}
-              description={post.description}
-              date={post.date}
-              tags={post.tags}
+              title={post.metadata.title}
+              description={post.metadata.description}
+              date={post.metadata.date}
+              tags={post.metadata.tags}
             />
           ))}
         </div>
