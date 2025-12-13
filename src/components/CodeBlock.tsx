@@ -13,11 +13,12 @@ export default async function CodeBlock({ children, className }: CodeBlockProps)
 
   const html = await codeToHtml(code, {
     lang,
+    theme: 'material-theme',
     themes: {
-      light: 'github-light',
-      dark: 'github-dark',
+      light: 'material-theme',
+      dark: 'material-theme-darker',
     },
   });
 
-  return <div className="p-4 overflow-hidden" dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div className="[&_pre]:p-4 [&_pre]:rounded-md" dangerouslySetInnerHTML={{ __html: html }} />;
 }
