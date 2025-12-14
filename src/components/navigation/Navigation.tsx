@@ -33,9 +33,9 @@ export default function Navigation({
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 w-full font-roboto backdrop-blur-sm ${className}`}
+      className={`fixed top-0 left-0 right-0 z-50 w-full font-roboto bg-background dark:border-none border border-b-border ${className}`}
     >
-      <DefaultPad className="py-4 shadow-lg">
+      <DefaultPad className="py-4">
         <div className="flex items-center justify-between">
           <Link
             className="text-xl font-playwrite font-thin hover:text-light-peru transition-colors duration-200"
