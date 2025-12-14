@@ -25,24 +25,24 @@ interface PreProps {
 export function useMDXComponents(): MDXComponents {
   return {
     h1: ({ children }: TextProps) => (
-      <h1 className="text-4xl font-bold mt-8 mb-4 text-peru">{children}</h1>
+      <h1 className="text-4xl font-bold mt-8 mb-4 text-foreground">{children}</h1>
     ),
     h2: ({ children }: TextProps) => (
-      <h2 className="text-3xl font-bold mt-6 mb-3 text-peru">{children}</h2>
+      <h2 className="text-3xl font-bold mt-6 mb-3 text-foreground">{children}</h2>
     ),
     h3: ({ children }: TextProps) => (
-      <h3 className="text-2xl font-bold mt-5 mb-2 text-peru">{children}</h3>
+      <h3 className="text-2xl font-bold mt-5 mb-2 text-foreground">{children}</h3>
     ),
     h4: ({ children }: TextProps) => (
-      <h4 className="text-xl font-bold mt-4 mb-2 text-sandy-brown">{children}</h4>
+      <h4 className="text-xl font-bold mt-4 mb-2 text-muted-foreground">{children}</h4>
     ),
     h5: ({ children }: TextProps) => (
-      <h5 className="text-lg font-bold mt-3 mb-2 text-sandy-brown">{children}</h5>
+      <h5 className="text-lg font-bold mt-3 mb-2 text-muted-foreground">{children}</h5>
     ),
     h6: ({ children }: TextProps) => (
-      <h6 className="text-base font-bold mt-2 mb-1 text-sandy-brown">{children}</h6>
+      <h6 className="text-base font-bold mt-2 mb-1 text-muted-foreground">{children}</h6>
     ),
-    p: ({ children }: TextProps) => <p className="my-4 leading-relaxed">{children}</p>,
+    p: ({ children }: TextProps) => <p className="my-4 leading-relaxed text-foreground">{children}</p>,
     a: ({ href, children }: LinkProps) => {
       const isExternal = href.startsWith('http');
       if (isExternal) {

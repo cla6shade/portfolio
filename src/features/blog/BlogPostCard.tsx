@@ -14,9 +14,9 @@ export default function BlogPostCard({ slug, title, description, date, tags }: B
   return (
     <Link
       href={`/blog/${slug}`}
-      className="block group p-6 rounded-lg border border-sandy-brown/20 hover:border-sandy-brown/50 bg-background hover:shadow-lg transition-all duration-300"
+      className="block group p-6 rounded-lg border hover:border-sandy-brown bg-background transition-all duration-300"
     >
-      <h2 className="text-2xl font-bold mb-2 text-sandy-brown group-hover:text-peru transition-colors">
+      <h2 className="text-2xl font-bold mb-2 group-hover:text-sandy-brown transition-colors">
         {title}
       </h2>
 
@@ -33,10 +33,7 @@ export default function BlogPostCard({ slug, title, description, date, tags }: B
         <div className="flex items-center gap-2 flex-wrap">
           <Tag className="w-4 h-4 text-sandy-brown" />
           {tags.map((tag, index) => (
-            <Badge
-              key={`blog-tag-${index}`}
-              variant="secondary"
-            >
+            <Badge key={`blog-tag-${index}`} variant="secondary">
               {tag}
             </Badge>
           ))}
