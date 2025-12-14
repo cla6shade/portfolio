@@ -13,7 +13,11 @@ const nextConfig: NextConfig = {
   },
 };
 
-const withMDX = createMDX({});
+const withMDX = createMDX({
+  options: {
+    rehypePlugins: ['rehype-slug'],
+  },
+});
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const withAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
