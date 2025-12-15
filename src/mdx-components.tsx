@@ -2,16 +2,29 @@ import type { MDXComponents } from 'mdx/types';
 import Link from 'next/link';
 import Image from 'next/image';
 import CodeBlock from '@/components/CodeBlock';
+import {
+  ComponentPropsWithoutRef, ElementType,
+} from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { cn } from '@/lib/utils';
+
+type CreateComponentArgs<T extends ElementType> = ComponentPropsWithoutRef<T>
+
+function BaseComponent<T extends ElementType>({ className, ...rest }: CreateComponentArgs<T>) {
+  return (
+    <Slot className={cn('scroll-mt-20', className)} {...rest} />
+  )
+}
 
 export function useMDXComponents(): MDXComponents {
   return {
-    h1: (props) => <h1 className="text-4xl font-bold mt-8 mb-4 text-foreground" {...props} />,
-    h2: (props) => <h2 className="text-3xl font-bold mt-6 mb-3 text-foreground" {...props} />,
-    h3: (props) => <h3 className="text-2xl font-bold mt-5 mb-2 text-foreground" {...props} />,
-    h4: (props) => <h4 className="text-xl font-bold mt-4 mb-2 text-muted-foreground" {...props} />,
-    h5: (props) => <h5 className="text-lg font-bold mt-3 mb-2 text-muted-foreground" {...props} />,
+    h1: (props) => <BaseComponent><h1 className="text-4xl font-bold mt-8 mb-4 text-foreground" {...props} /></BaseComponent>,
+    h2: (props) => <BaseComponent><h2 className="text-3xl font-bold mt-6 mb-3 text-foreground" {...props} /></BaseComponent>,
+    h3: (props) => <BaseComponent><h3 className="text-2xl font-bold mt-5 mb-2 text-foreground" {...props} /></BaseComponent>,
+    h4: (props) => <BaseComponent><h4 className="text-xl font-bold mt-4 mb-2 text-muted-foreground" {...props} /></BaseComponent>,
+    h5: (props) => <BaseComponent><h5 className="text-lg font-bold mt-3 mb-2 text-muted-foreground" {...props} /></BaseComponent>,
     h6: (props) => (
-      <h6 className="text-base font-bold mt-2 mb-1 text-muted-foreground" {...props} />
+      <BaseComponent><h6 className="text-base font-bold mt-2 mb-1 text-muted-foreground" {...props} /></BaseComponent>
     ),
     p: (props) => <p className="my-4 leading-relaxed text-foreground" {...props} />,
     a: ({ href, ...props }) => {
