@@ -7,24 +7,25 @@ type ControllerItem = {
   level: number;
   positionY: number;
   href: string;
+  id: string;
 };
 
 export default function useControl() {
   const [controllerItems, setControllerItems] = useState<ControllerItem[]>([]);
-  const [currentFocused, setCurrentFocused] = useState<ControllerItem>();
+  const [currentFocused, setCurrentFocused] = useState<string>();
 
   useEffect(() => {
-    const items = getControlItems();
+    const nodes = getSemanticNodes();
+    const items = getControlItems(nodes);
     const nearestItem = getNearestItem(items);
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setControllerItems(items);
-    setCurrentFocused(nearestItem);
+    setCurrentFocused(nearestItem.id);
 
     const scrollHandler = throttle(() => {
       const nearest = getNearestItem(items);
-      setCurrentFocused(nearest);
-    }, 100);
-
+      setCurrentFocused(nearest.id);
+    }, 50);
     window.addEventListener('scroll', scrollHandler);
     return () => {
       window.removeEventListener('scroll', scrollHandler);
@@ -33,18 +34,22 @@ export default function useControl() {
   return { controllerItems, currentFocused };
 }
 
-function getControlItems() {
-  const mainChild = document.querySelectorAll('main h1, h2, h3');
-  if (mainChild.length === 0) return [];
+function getSemanticNodes() {
+  return document.querySelectorAll('main h1, h2, h3') as NodeListOf<HTMLHeadingElement>;
+}
+
+function getControlItems(nodes: NodeListOf<Element>) {
+  if (nodes.length === 0) return [];
   const items: ControllerItem[] = Array.from(
-    mainChild.values().map((node) => {
-      const positionY = node.getBoundingClientRect().bottom + window.scrollY;
+    nodes.values().map((node) => {
+      const positionY = node.getBoundingClientRect().top + window.scrollY;
       const level = getControlLevel(node.localName);
       const href = `#${node.id}`;
       return {
         positionY,
         level,
         href,
+        id: node.id
       };
     }),
   );
