@@ -1,11 +1,11 @@
 import DefaultPad from '@/components/container/DefaultPad';
 import { ArrowLeft, Calendar, User } from 'lucide-react';
 import Link from 'next/link';
-import {
-  BlogMetadata,
-  getAllBlogPosts,
-} from '@/features/blog/mdx';
+import { BlogMetadata, getAllBlogPosts } from '@/features/blog/mdx';
 import { Badge } from '@/components/ui/badge';
+import ContentVerticalPad from '@/components/container/ContentVerticalPad';
+import PostControllerTrack from '@/features/blog/controller/PostControllerTrack';
+import PostController from '@/features/blog/controller/PostController';
 
 export async function generateStaticParams() {
   const posts = await getAllBlogPosts();
@@ -18,13 +18,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const { slug } = await params;
 
   const { default: Post, metadata } = await import(`@/contents/${slug}.mdx`);
-  const {
-    title,
-    description,
-    date,
-    author,
-    tags,
-  } = metadata as BlogMetadata;
+  const { title, description, date, author, tags } = metadata as BlogMetadata;
 
   const formattedDate = new Date(date).toLocaleDateString('ko-KR', {
     year: 'numeric',
@@ -33,8 +27,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   });
 
   return (
-    <DefaultPad className="py-16">
-      <div className="max-w-3xl mx-auto">
+    <DefaultPad className="flex">
+      <ContentVerticalPad>
         <Link
           href="/blog"
           className="inline-flex items-center gap-2 text-sandy-brown hover:text-peru transition-colors mb-8"
@@ -44,9 +38,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </Link>
 
         <header className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-peru">
-            {title}
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
 
           <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
             <div className="flex items-center gap-2">
@@ -64,10 +56,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           {tags.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
-                <Badge
-                  key={`tag-${tag}`}
-                  variant="secondary"
-                >
+                <Badge key={`tag-${tag}`} variant="secondary">
                   {tag}
                 </Badge>
               ))}
@@ -78,7 +67,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <article>
           <Post />
         </article>
-      </div>
+      </ContentVerticalPad>
+      <ContentVerticalPad>
+        <PostControllerTrack>
+          <PostController />
+        </PostControllerTrack>
+      </ContentVerticalPad>
     </DefaultPad>
   );
 }
