@@ -25,6 +25,7 @@ export default function LandingNavigation({ followersPromise }: LandingNavigatio
       items={navigationItems}
       navChild={<GithubButton>{followers}</GithubButton>}
       sheetChild={<GithubButton variant="sheet">{followers}</GithubButton>}
+      className="bg-transparent"
     />
   );
 }
