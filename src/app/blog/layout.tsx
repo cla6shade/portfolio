@@ -9,7 +9,7 @@ interface BlogLayoutProps {
 
 export default function BlogLayout({ children }: BlogLayoutProps) {
   return (
-    <ThemeProvider enableSystem attribute="class">
+    <ThemeProvider defaultTheme="system" enableSystem disableTransitionOnChange attribute="class">
       <BlogNavigation />
       <main className="min-h-screen pt-20 bg-background text-foreground font-noto-serif">
         {children}
