@@ -55,7 +55,13 @@ export async function generateMetadata({
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  const { default: Post, metadata } = await import(`@/contents/${slug}/${slug}.mdx`);
+  let mdx = null;
+  try {
+    mdx = await import(`@/contents/${slug}/${slug}.mdx`);
+  } catch (_: unknown) {
+    return <></>;
+  }
+  const { default: Post, metadata } = mdx;
   const { title, description, date, author, tags } = metadata as BlogMetadata;
 
   const formattedDate = new Date(date).toLocaleDateString('ko-KR', {
