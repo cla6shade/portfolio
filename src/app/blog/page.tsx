@@ -1,9 +1,64 @@
+import { type Metadata } from 'next';
 import DefaultPad from '@/components/container/DefaultPad';
 import { getAllBlogPosts } from '@/features/blog/utils/post';
 import RecentPostsSection from '@/features/blog/sections/RecentPostsSection';
 import AllPostsSection from '@/features/blog/sections/AllPostsSection';
 import ProfileInfoSection from '@/features/blog/sections/ProfileInfoSection';
 import fetchUserInfo from '@/features/landing/utils/fetch-user-info';
+
+export const metadata: Metadata = {
+  title: 'CLAVIS.LOG - 개발 기록과 자아성찰',
+  description: '개발 기록과 자아 성찰을 담는 블로그',
+  keywords: [
+    'Blog',
+    'Developer Blog',
+    'Frontend',
+    'TypeScript',
+    'React',
+    'Next.js',
+    'Web Development',
+    '개발 블로그',
+    '프론트엔드',
+    '기술 블로그',
+  ],
+  authors: [{ name: 'CLAVISHADE' }],
+  openGraph: {
+    type: 'website',
+    locale: 'ko_KR',
+    url: 'https://cla6sha.de/blog',
+    siteName: 'CLAVIS.LOG',
+    title: 'CLAVIS.LOG - 개발 기록과 자아성찰',
+    description: '개발 기록과 자아 성찰을 담는 블로그',
+    images: [
+      {
+        url: 'https://avatars.githubusercontent.com/u/111969754',
+        width: 1200,
+        height: 630,
+        alt: 'CLAVIS.LOG Blog',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CLAVIS.LOG - 개발 기록과 자아성찰',
+    description: '개발 기록과 자아 성찰을 담는 블로그',
+    images: ['https://avatars.githubusercontent.com/u/111969754'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://cla6sha.de/blog',
+  },
+};
 
 export default async function BlogPage() {
   const blogPosts = await getAllBlogPosts();
