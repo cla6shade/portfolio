@@ -1,7 +1,8 @@
 import DefaultPad from '@/components/container/DefaultPad';
 import { ArrowLeft, Calendar, User } from 'lucide-react';
 import Link from 'next/link';
-import { BlogMetadata, getAllBlogPosts } from '@/features/blog/mdx';
+import { type Metadata } from 'next';
+import { BlogMetadata, getAllBlogPosts } from '@/features/blog/utils/post';
 import { Badge } from '@/components/ui/badge';
 import ContentVerticalPad from '@/components/container/ContentVerticalPad';
 import PostControllerTrack from '@/features/blog/controller/PostControllerTrack';
@@ -14,10 +15,47 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  try {
+    const { metadata } = await import(`@/contents/${slug}/${slug}.mdx`);
+    const { title, description, author, thumbnail } = metadata as BlogMetadata;
+
+    return {
+      metadataBase: 'https://cla6sha.de',
+      title,
+      description,
+      authors: [{ name: author }],
+      openGraph: {
+        title,
+        description,
+        type: 'article',
+        images: thumbnail ? [{ url: thumbnail }] : undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: thumbnail ? [thumbnail] : undefined,
+      },
+    };
+  } catch {
+    return {
+      title: 'Blog Post Not Found',
+      description: 'The requested blog post could not be found.',
+    };
+  }
+}
+
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  const { default: Post, metadata } = await import(`@/contents/${slug}.mdx`);
+  const { default: Post, metadata } = await import(`@/contents/${slug}/${slug}.mdx`);
   const { title, description, date, author, tags } = metadata as BlogMetadata;
 
   const formattedDate = new Date(date).toLocaleDateString('ko-KR', {
@@ -28,7 +66,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <DefaultPad className="flex">
-      <ContentVerticalPad>
+      <ContentVerticalPad className="w-full tablet:w-[calc(100dvw-320px)]">
         <Link
           href="/blog"
           className="inline-flex items-center gap-2 text-sandy-brown hover:text-peru transition-colors mb-8"
