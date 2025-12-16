@@ -9,6 +9,7 @@ const githubButtonVariants = cva('py-2 bg-orange-300 cursor-pointer hover:bg-pea
     variant: {
       navigation: 'rounded-full',
       sheet: 'w-full rounded-sm py-5',
+      ghost: '',
     },
   },
   defaultVariants: {
@@ -21,6 +22,7 @@ const linkVariants = cva('group', {
     variant: {
       navigation: '',
       sheet: 'w-full px-3 py-3',
+      ghost: '',
     },
   },
   defaultVariants: {
@@ -29,10 +31,25 @@ const linkVariants = cva('group', {
 });
 
 interface GithubButtonProps extends VariantProps<typeof githubButtonVariants> {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export default function GithubButton({ children, variant }: GithubButtonProps) {
+  if (variant === 'ghost') {
+    return (
+      <a
+        href="https://github.com/cla6shade"
+        target="_blank"
+        className={cn(linkVariants({ variant }))}
+      >
+        <Button variant="ghost" size="icon" className="w-9 h-9">
+          <Github className="h-5 w-5" />
+          <span className="sr-only">Go to GitHub</span>
+        </Button>
+      </a>
+    );
+  }
+
   return (
     <a
       href="https://github.com/cla6shade"
