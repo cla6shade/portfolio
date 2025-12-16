@@ -49,7 +49,7 @@ function getControlItems(nodes: NodeListOf<Element>) {
         positionY,
         level,
         href,
-        id: node.id
+        id: node.id,
       };
     }),
   );
@@ -75,7 +75,6 @@ function getNearestItem(controllerItems: ControllerItem[]) {
   let nearest: ControllerItem | null = null;
   controllerItems.forEach((item) => {
     const itemDistance = Math.abs(offsetY - item.positionY);
-    console.log(`offset: ${offsetY}, position: ${item.positionY}`);
     if (itemDistance > distance) return;
     distance = itemDistance;
     nearest = item;
