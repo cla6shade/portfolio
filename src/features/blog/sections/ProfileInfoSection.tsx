@@ -100,8 +100,11 @@ export default function ProfileInfoSection({ userInfoPromise }: ProfileInfoSecti
   return (
     <Suspense
       fallback={
-        <aside className="hidden desktop:block">
-          <div className="border border-border rounded-lg p-6 space-y-6 animate-pulse">
+        <aside className="hidden desktop:block w-80">
+          <div className="border-l-4 border-l-muted pl-2 animate-pulse">
+            <div className="h-7 w-20 bg-muted rounded" />
+          </div>
+          <div className="p-6 space-y-6 animate-pulse">
             <div className="flex flex-col items-center space-y-4">
               <div className="w-24 h-24 rounded-full bg-muted" />
               <div className="space-y-2">
