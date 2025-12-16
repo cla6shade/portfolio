@@ -10,6 +10,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 interface NavigationItem {
   href: string;
@@ -33,7 +34,10 @@ export default function Navigation({
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 w-full font-roboto bg-background dark:border-none border border-b-border ${className}`}
+      className={cn(
+        'fixed top-0 left-0 right-0 z-50 w-full font-roboto bg-background dark:border-none border border-b-border',
+        className,
+      )}
     >
       <DefaultPad className="py-4">
         <div className="flex items-center justify-between">
@@ -69,17 +73,17 @@ export default function Navigation({
                   className="p-2 hover:bg-white/10 rounded-md transition-colors"
                   aria-label="Open menu"
                 >
-                  <Menu className="h-6 w-6 text-white" />
+                  <Menu className="h-6 w-6 text-black dark:text-white" />
                 </button>
               </SheetTrigger>
-              <SheetContent className="bg-neutral-950 border-l border-white/10 w-[280px]">
+              <SheetContent className="bg-background border-l border-white/10 w-[280px] pt-4">
                 <div className="flex flex-col gap-8 pt-8">
                   <div className="flex flex-col gap-2">
                     {items.map((item) => (
                       <a
                         key={`mobile-nav-${item.href}`}
                         href={item.href}
-                        className="text-base font-roboto text-white hover:text-sandy-brown hover:bg-white/5 transition-all py-3 px-6 rounded-lg"
+                        className="text-base font-roboto  hover:text-sandy-brown hover:bg-white/5 transition-all py-3 px-6 rounded-lg"
                         onClick={() => setOpen(false)}
                       >
                         {item.label}
