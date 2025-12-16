@@ -147,6 +147,12 @@
   body {
     @apply bg-background text-foreground;
   }
+  ::selection {
+    @apply bg-light-peru text-white;
+  }
+  ::-moz-selection {
+    @apply bg-light-peru text-white;
+  }
 }
 
 .heading-gradient {
