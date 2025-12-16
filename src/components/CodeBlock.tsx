@@ -20,6 +20,9 @@ export default async function CodeBlock({ children, className }: CodeBlockProps)
   });
 
   return (
-    <div className="[&_pre]:p-4 [&_pre]:rounded-md" dangerouslySetInnerHTML={{ __html: html }} />
+    <div
+      className="[&_pre]:p-4 [&_pre]:rounded-md [&_pre]:text-wrap"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
   );
 }
