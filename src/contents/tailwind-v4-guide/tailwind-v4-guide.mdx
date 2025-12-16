@@ -1,0 +1,148 @@
+export const metadata = {
+  title: "Tailwind CSS v4 마이그레이션 가이드",
+  description: "Tailwind CSS v4의 새로운 기능과 v3에서 마이그레이션하는 방법을 알아봅니다.",
+  date: "2025-12-13",
+  author: "CLAVISHADE",
+  tags: ["Tailwind CSS", "CSS", "마이그레이션"],
+  published: true,
+  thumbnail: '/blog/tailwind-v4-guide/thumbnail.webp',
+};
+
+Tailwind CSS v4는 PostCSS 기반의 새로운 설정 방식을 도입했습니다.
+
+## 주요 변경사항
+
+v4에서는 `tailwind.config.js` 대신 CSS 파일에서 직접 설정을 관리합니다.
+
+### 설정 파일 제거
+
+더 이상 `tailwind.config.js`가 필요 없습니다:
+
+```css
+/* app/globals.css */
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: oklch(0.5 0.2 250);
+  --color-secondary: oklch(0.7 0.15 150);
+
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --breakpoint-3xl: 1920px;
+}
+```
+
+## OKLch 색상 공간
+
+v4는 OKLch 색상 공간을 기본으로 사용합니다:
+
+```css
+@theme inline {
+  /* OKLch: oklch(lightness chroma hue) */
+  --color-sandy-brown: oklch(0.756 0.117 57.5);
+  --color-peach: oklch(0.903 0.079 68.8);
+  --color-cream: oklch(0.978 0.027 88.5);
+}
+```
+
+OKLch의 장점:
+- **지각적으로 균일**: 사람 눈에 자연스러운 색상 변화
+- **넓은 색역**: 더 다양한 색상 표현
+- **예측 가능**: lightness 값이 실제 밝기와 일치
+
+## 커스텀 Variant
+
+CSS에서 직접 variant를 정의할 수 있습니다:
+
+```css
+@custom-variant dark (&:is(.dark *));
+@custom-variant hocus (&:is(:hover, :focus));
+@custom-variant optional (&:optional);
+```
+
+사용:
+
+```html
+<div class="dark:bg-black hocus:scale-105">
+  Hover or focus to scale
+</div>
+```
+
+## 커스텀 애니메이션
+
+애니메이션도 CSS에서 직접 정의:
+
+```css
+@theme inline {
+  --animate-slide-in: slide-in 0.3s ease-out;
+
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+```
+
+사용:
+
+```html
+<div class="animate-slide-in">
+  Slides in on mount
+</div>
+```
+
+## 다크 모드
+
+CSS 변수를 활용한 다크 모드:
+
+```css
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.2 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.922 0 0);
+}
+```
+
+컴포넌트에서 사용:
+
+```tsx
+export default function Component() {
+  return (
+    <div className="bg-background text-foreground">
+      Automatically adapts to dark mode
+    </div>
+  );
+}
+```
+
+## 마이그레이션 체크리스트
+
+v3에서 v4로 마이그레이션:
+
+1. `tailwind.config.js` 삭제
+2. `globals.css`에 `@theme inline` 블록 추가
+3. 커스텀 색상을 OKLch로 변환
+4. `extend` 설정을 CSS 변수로 이동
+5. 플러그인 설정 확인 및 업데이트
+
+## 성능 개선
+
+v4는 더 빠른 빌드 속도를 제공합니다:
+
+- **Lightning CSS**: Rust 기반의 빠른 CSS 처리
+- **Tree Shaking**: 사용하지 않는 스타일 자동 제거
+- **캐싱**: 증분 빌드 최적화
+
+## 결론
+
+Tailwind v4는 설정이 더 간단해지고, 성능이 크게 향상되었습니다. OKLch 색상 공간과 CSS 기반 설정은 더 나은 개발 경험을 제공합니다.

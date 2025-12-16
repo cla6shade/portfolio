@@ -1,0 +1,82 @@
+export const metadata = {
+  title: "Next.js App Router 완벽 가이드",
+  description: "Next.js 14에서 도입된 App Router의 핵심 개념과 Pages Router와의 차이점을 알아봅니다.",
+  date: "2025-12-12",
+  author: "CLAVISHADE",
+  tags: ["Next.js", "App Router", "React"],
+  published: true,
+  thumbnail: '/blog/nextjs-app-router/thumbnail.webp',
+};
+
+Next.js 14에서 도입된 App Router는 기존 Pages Router를 대체하는 새로운 라우팅 시스템입니다.
+
+## App Router vs Pages Router
+
+App Router는 React Server Components를 기반으로 하며, 더 나은 성능과 개발 경험을 제공합니다.
+
+### 주요 차이점
+
+- **파일 시스템 기반 라우팅**: `app` 디렉토리 사용
+- **Server Components 기본**: 모든 컴포넌트가 기본적으로 서버 컴포넌트
+- **레이아웃 시스템**: 중첩 레이아웃 지원
+- **로딩 및 에러 처리**: `loading.tsx`, `error.tsx` 파일로 간편한 처리
+
+## 폴더 구조
+
+```
+app/
+├── layout.tsx       # 루트 레이아웃
+├── page.tsx         # 홈페이지
+├── blog/
+│   ├── layout.tsx   # 블로그 레이아웃
+│   ├── page.tsx     # 블로그 목록
+│   └── [slug]/
+│       └── page.tsx # 블로그 상세
+```
+
+## Server Components vs Client Components
+
+Server Components는 서버에서만 실행되며, Client Components는 클라이언트에서 hydration됩니다.
+
+```tsx
+// Server Component (기본값)
+export default async function Page() {
+  const data = await fetch('https://api.example.com/data');
+  return <div>{data}</div>;
+}
+
+// Client Component
+'use client';
+
+import { useState } from 'react';
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
+}
+```
+
+## Data Fetching
+
+App Router에서는 `fetch` API를 확장하여 캐싱과 재검증을 지원합니다.
+
+```tsx
+// 정적 데이터 (빌드 시 fetch)
+const data = await fetch('https://api.example.com/posts', {
+  cache: 'force-cache'
+});
+
+// 동적 데이터 (요청마다 fetch)
+const data = await fetch('https://api.example.com/posts', {
+  cache: 'no-store'
+});
+
+// 재검증 (10초마다)
+const data = await fetch('https://api.example.com/posts', {
+  next: { revalidate: 10 }
+});
+```
+
+## 결론
+
+App Router는 Next.js의 미래입니다. Server Components를 활용하면 더 빠르고 효율적인 웹 애플리케이션을 만들 수 있습니다.
