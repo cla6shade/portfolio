@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
-const cardVariants = cva('block group bg-background transition-all duration-300 overflow-hidden', {
+const cardVariants = cva('block group transition-all duration-300 overflow-hidden', {
   variants: {
     variant: {
       vertical: '',
