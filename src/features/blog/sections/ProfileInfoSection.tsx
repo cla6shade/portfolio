@@ -106,12 +106,39 @@ export default function ProfileInfoSection({ userInfoPromise }: ProfileInfoSecti
           </div>
           <div className="p-6 space-y-6 animate-pulse">
             <div className="flex flex-col items-center space-y-4">
-              <div className="w-24 h-24 rounded-full bg-muted" />
-              <div className="space-y-2">
-                <div className="h-6 w-32 bg-muted rounded" />
-                <div className="h-4 w-24 bg-muted rounded" />
+              <div className="relative w-24 h-24 rounded-full bg-muted ring-2 ring-sandy-brown/20" />
+
+              <div className="text-center space-y-1">
+                <div className="h-7 w-32 bg-muted rounded mx-auto" />
+                <div className="h-5 w-24 bg-muted rounded mx-auto" />
+              </div>
+
+              <div className="h-10 w-full bg-muted rounded" />
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-muted rounded" />
+                <div className="h-5 w-32 bg-muted rounded" />
               </div>
             </div>
+
+            <div className="grid grid-cols-3 gap-4 py-4 border-y border-border">
+              <div className="text-center">
+                <div className="h-7 w-8 bg-muted rounded mx-auto mb-1" />
+                <div className="h-4 w-16 bg-muted rounded mx-auto" />
+              </div>
+              <div className="text-center">
+                <div className="h-7 w-8 bg-muted rounded mx-auto mb-1" />
+                <div className="h-4 w-16 bg-muted rounded mx-auto" />
+              </div>
+              <div className="text-center">
+                <div className="h-7 w-8 bg-muted rounded mx-auto mb-1" />
+                <div className="h-4 w-12 bg-muted rounded mx-auto" />
+              </div>
+            </div>
+
+            <div className="h-10 w-full bg-muted rounded" />
           </div>
         </aside>
       }

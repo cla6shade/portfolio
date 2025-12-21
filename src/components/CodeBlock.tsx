@@ -21,7 +21,8 @@ export default async function CodeBlock({ children, className }: CodeBlockProps)
 
   return (
     <div
-      className="[&_pre]:p-4 [&_pre]:rounded-md [&_pre]:text-wrap"
+      className="[&_pre]:p-4 [&_pre]:rounded-md [&_pre]:text-wrap overflow-x-auto [&_pre]:w-fit ![scrollbar-width:none]
+    [&::-webkit-scrollbar]:hidden"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
