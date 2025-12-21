@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX({
   options: {
-    rehypePlugins: ['rehype-slug'],
+    rehypePlugins: ['rehype-slug', 'rehype-unwrap-images'],
   },
 });
 // eslint-disable-next-line @typescript-eslint/no-require-imports
