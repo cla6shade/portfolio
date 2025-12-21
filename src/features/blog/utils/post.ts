@@ -1,4 +1,4 @@
-import { join, basename } from 'path';
+import { join, basename, dirname } from 'path';
 import { type ReactNode } from 'react';
 import { glob } from 'glob';
 
@@ -25,7 +25,7 @@ export interface PostInfo {
 
 export async function getAllMdxFiles() {
   try {
-    const contentsPath = join(process.cwd(), 'src/contents/**/*.mdx');
+    const contentsPath = join(process.cwd(), 'src/contents/**/index.mdx');
     return await glob(contentsPath, {
       windowsPathsNoEscape: true,
     });
@@ -36,7 +36,10 @@ export async function getAllMdxFiles() {
 }
 
 export function getSlugByFilename(filename: string): string {
-  return basename(filename, '.mdx');
+  // Extract the parent directory name as the slug
+  // e.g., "C:\...\src\contents\portfolio-dev-1\index.mdx" -> "portfolio-dev-1"
+  const dir = dirname(filename);
+  return basename(dir);
 }
 
 export async function getAllSlugs() {
@@ -46,7 +49,7 @@ export async function getAllSlugs() {
 
 export async function getMdxBySlug(slug: string): Promise<BlogPost | null> {
   try {
-    const { default: Post, metadata } = await import(`@/contents/${slug}/${slug}.mdx`);
+    const { default: Post, metadata } = await import(`@/contents/${slug}/index.mdx`);
     return { slug, Post, metadata: metadata as BlogMetadata };
   } catch {
     return null;
