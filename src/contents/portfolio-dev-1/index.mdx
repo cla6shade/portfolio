@@ -23,7 +23,7 @@ export const metadata = {
 
 ---
 
-## 원인 분석 - (1)
+## 원인 분석
 
 구체적인 원인 분석을 위해 Chrome 개발자 도구의 Performance 탭을 이용했다.
 
@@ -50,6 +50,10 @@ export const metadata = {
 
 Canvas로 전달하는 `frameloop`옵션을 "demand"로 주면 되는데, 문제는 내가 피아노를 눌렀을 때 카메라 각도를 조정하는 기능을 개발할 때
 부드러운 화면 전환을 위해 prop 변경이 아닌 camera ref를 통해 직접 객체를 조정하는 식으로 개발했다는 것이다.
+
+실제로 `frameloop="demand"`로 설정할 경우 state 업데이트 시에만 프레임이 업데이트되어 끊기는 것을 확인할 수 있었다.
+
+<Video src="/blog/portfolio-dev-1/frameloop-demand.webm" />
 
 ### 카메라 이동 코드
 
@@ -95,12 +99,10 @@ const animateCamera = (targetPosition: Vector3, targetLookAt: Vector3) => {
 하지만 이 방식은 오히려 복잡성만 높아지는 느낌이다. 프레임 콜백 내부에서 다음 프레임을 렌더링할지 결정하는 것보다 외부에서 프레임 업데이트를 할지 말지 정하는 것이
 복잡성 면에서 훨씬 더 유리하다는 생각이 들었다.
 
-## 해결 방법
+### IntersectionObserver를 이용한 루프 정책 변경
 
 공식 문서대로 위의 카메라 이동 코드에 `invalidate()`를 일일이 추가하는 대신, 3D Scene 외부에서 해당 Scene이 보이는지 여부를 체크하여
 루프 정책(Canvas의 frameloop prop)을 변경하는 방식으로 해결할 수 있었다.
-
-### IntersectionObserver를 이용한 루프 정책 변경
 
 1. 3D Scene이 포함된 섹션과 동일한 크기의 div를 함께 렌더링한다.
 2. IntersectionObserver을 이용하여 1에서 생성한 div가 화면상에서 Intersecting하지 않는 경우 Canvas에 전달되는
@@ -135,9 +137,10 @@ function HeroContent() {
 
 최적화 전후를 조금 더 명확하게 비교하기 위해, Performance 탭에서 CPU에 4x slowdown을 걸고 전후 성능을 비교하였다.
 
-
-![perf-before](/blog/portfolio-dev-1/perf-4x-before.webp)
-![perf-after](/blog/portfolio-dev-1/perf-4x-after.webp)
+<div className="lg-desktop:grid lg-desktop:grid-cols-2 gap-2">
+  ![perf-before](/blog/portfolio-dev-1/perf-4x-before.webp)
+  ![perf-after](/blog/portfolio-dev-1/perf-4x-after.webp)
+</div>
 
 <div className="flex justify-center">
   사진 순서대로 성능 개선 전, 후
