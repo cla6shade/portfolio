@@ -23,7 +23,7 @@ export async function generateMetadata({
   const { slug } = await params;
 
   try {
-    const { metadata } = await import(`@/contents/${slug}/${slug}.mdx`);
+    const { metadata } = await import(`@/contents/${slug}/index.mdx`);
     const { title, description, author, thumbnail } = metadata as BlogMetadata;
 
     return {
@@ -57,12 +57,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   let mdx = null;
   try {
-    mdx = await import(`@/contents/${slug}/${slug}.mdx`);
+    mdx = await import(`@/contents/${slug}/index.mdx`);
   } catch (_: unknown) {
     return <></>;
   }
   const { default: Post, metadata } = mdx;
-  const { title, description, date, author, tags } = metadata as BlogMetadata;
+  const { title, description, date, author, tags, thumbnail } = metadata as BlogMetadata;
 
   const formattedDate = new Date(date).toLocaleDateString('ko-KR', {
     year: 'numeric',
@@ -71,8 +71,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   });
 
   return (
-    <DefaultPad className="flex">
-      <ContentVerticalPad className="w-full tablet:w-[calc(100dvw-320px)]">
+    <DefaultPad className="flex justify-center">
+      <ContentVerticalPad className="w-full max-w-4xl">
         <Link
           href="/blog"
           className="inline-flex items-center gap-2 text-sandy-brown hover:text-peru transition-colors mb-8"
