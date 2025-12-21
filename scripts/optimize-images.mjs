@@ -1,40 +1,59 @@
 import { glob } from 'glob';
 import sharp from 'sharp';
-import { mkdir, stat } from 'fs/promises';
+import { mkdir, copyFile } from 'fs/promises';
 import { basename, dirname, extname, join } from 'path';
-
-async function fileExists(filePath) {
-  try {
-    await stat(filePath);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-async function shouldConvert(sourcePath, targetPath) {
-  if (!(await fileExists(targetPath))) {
-    return true;
-  }
-
-  const sourceStats = await stat(sourcePath);
-  const targetStats = await stat(targetPath);
-
-  return sourceStats.mtimeMs > targetStats.mtimeMs;
-}
+import { shouldConvert, deleteFile } from './utils.mjs';
 
 async function convertToWebp(sourcePath, targetPath) {
   const targetDir = dirname(targetPath);
   await mkdir(targetDir, { recursive: true });
 
-  await sharp(sourcePath).webp({ quality: 85 }).toFile(targetPath);
+  await sharp(sourcePath)
+    .webp({ quality: 100, lossless: false, nearLossless: false, smartSubsample: true })
+    .toFile(targetPath);
 
   console.log(`Converted: ${sourcePath} -> ${targetPath}`);
 }
 
+async function copyGif(sourcePath, targetPath) {
+  const targetDir = dirname(targetPath);
+  await mkdir(targetDir, { recursive: true });
+
+  await copyFile(sourcePath, targetPath);
+
+  console.log(`Copied: ${sourcePath} -> ${targetPath}`);
+}
+
+async function processImage(sourcePath, projectRoot) {
+  const parentDir = basename(dirname(sourcePath));
+  const fileName = basename(sourcePath, extname(sourcePath));
+  const ext = extname(sourcePath).toLowerCase();
+
+  const isGif = ext === '.gif';
+  const targetPath = isGif
+    ? join(projectRoot, 'public/blog', parentDir, `${fileName}.gif`)
+    : join(projectRoot, 'public/blog', parentDir, `${fileName}.webp`);
+
+  if (!(await shouldConvert(sourcePath, targetPath))) {
+    console.log(`Skipped: ${sourcePath}`);
+    await deleteFile(sourcePath);
+    return 'skipped';
+  }
+
+  if (isGif) {
+    await copyGif(sourcePath, targetPath);
+    await deleteFile(sourcePath);
+    return 'copied';
+  }
+
+  await convertToWebp(sourcePath, targetPath);
+  await deleteFile(sourcePath);
+  return 'converted';
+}
+
 async function main() {
   const projectRoot = process.cwd();
-  const pattern = join(projectRoot, 'src/contents/**/*.{png,jpg,webp}');
+  const pattern = join(projectRoot, 'src/contents/**/*.{png,jpg,webp,gif}');
   console.log(pattern);
   const imagePaths = await glob(pattern, { absolute: true, windowsPathsNoEscape: true });
 
@@ -46,26 +65,25 @@ async function main() {
   console.log(`Found ${imagePaths.length} images\n`);
 
   let convertedCount = 0;
+  let copiedCount = 0;
   let skippedCount = 0;
 
   for (const sourcePath of imagePaths) {
-    const parentDir = basename(dirname(sourcePath));
-    const fileName = basename(sourcePath, extname(sourcePath));
-    const targetPath = join(projectRoot, 'public/blog', parentDir, `${fileName}.webp`);
+    const result = await processImage(sourcePath, projectRoot);
 
-    if (!(await shouldConvert(sourcePath, targetPath))) {
-      console.log(`Skipped: ${sourcePath}`);
+    if (result === 'skipped') {
       skippedCount++;
-      continue;
+    } else if (result === 'copied') {
+      copiedCount++;
+    } else {
+      convertedCount++;
     }
-
-    await convertToWebp(sourcePath, targetPath);
-    convertedCount++;
   }
 
   console.log('\nSummary:');
   console.log(`Total images: ${imagePaths.length}`);
   console.log(`Converted: ${convertedCount}`);
+  console.log(`Copied (GIF): ${copiedCount}`);
   console.log(`Skipped: ${skippedCount}`);
 }
 
