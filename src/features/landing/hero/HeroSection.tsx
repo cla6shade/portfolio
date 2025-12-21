@@ -10,8 +10,9 @@ import Flex from '@/components/container/Flex';
 
 function HeroContent() {
   const { isPianoFocused, unfocusPiano } = useHero();
-  const { targetRef: observerTargetRef, isIntersecting: shouldMountScene } =
-    useIntersectionObserver({ rootMargin: '100px' });
+  const { targetRef: observerTargetRef, isIntersecting } = useIntersectionObserver({
+    rootMargin: '100px',
+  });
 
   const handleBackClick = () => {
     unfocusPiano();
@@ -21,7 +22,7 @@ function HeroContent() {
     <main className="w-full h-[40rem] max-h-dvh tablet:h-auto tablet:aspect-video relative">
       {!isPianoFocused && <HeroTextSection />}
 
-      <Scene frameloop={shouldMountScene ? 'always' : 'never'} />
+      <Scene frameloop={isIntersecting ? 'always' : 'never'} />
       <div ref={observerTargetRef} className="absolute inset-0 pointer-events-none" />
 
       <Flex justify="center" className="absolute bottom-6 w-full">
