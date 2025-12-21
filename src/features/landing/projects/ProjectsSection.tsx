@@ -9,8 +9,8 @@ import DefaultPad from '@/components/container/DefaultPad';
 
 export default function ProjectsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const offsetRef = useRef<{ offsetTop: number; offsetHeight: number }>(null);
 
   useEffect(() => {
     const calculateZTransform = (cardIndex: number, currentIndex: number): number => {
@@ -24,11 +24,11 @@ export default function ProjectsSection() {
     };
 
     const calculateCurrentSection = (): number => {
-      if (!containerRef.current) return 0;
+      if (!offsetRef.current) return 0;
 
       const scrollY = window.scrollY;
-      const sectionStart = containerRef.current.offsetTop;
-      const sectionHeight = containerRef.current.offsetHeight - window.innerHeight;
+      const sectionStart = offsetRef.current.offsetTop;
+      const sectionHeight = offsetRef.current.offsetHeight - window.innerHeight;
 
       const scrollRate = Math.max(
         0,
@@ -91,7 +91,13 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      ref={containerRef}
+      ref={(el) => {
+        if (!el) return;
+        offsetRef.current = {
+          offsetTop: el.offsetTop,
+          offsetHeight: el.offsetHeight,
+        };
+      }}
       className="w-full bg-gradient-to-b from-neutral-950 to-neutral-900 relative h-[350dvh]"
     >
       <DefaultPad className="sticky top-0 h-screen w-full z-10">
