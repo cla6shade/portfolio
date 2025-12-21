@@ -3,7 +3,7 @@ import Flex from '@/components/container/Flex';
 
 export default function PostControllerTrack({ children }: { children: ReactNode }) {
   return (
-    <div className="py-32 w-60 h-full hidden tablet:block">
+    <div className="py-32 w-60 h-full hidden lg-desktop:block absolute">
       <Flex className="w-60 fixed px-4">{children}</Flex>
     </div>
   );
