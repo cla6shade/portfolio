@@ -24,7 +24,7 @@ export default function PostController() {
               isFocused ? 'text-sandy-brown font-semibold' : 'text-foreground font-normal',
             )}
           >
-            {item.href.replace('#', '')}
+            {item.label}
           </Link>
         );
       })}

@@ -8,6 +8,7 @@ type ControllerItem = {
   positionY: number;
   href: string;
   id: string;
+  label: string;
 };
 
 export default function useControl() {
@@ -44,11 +45,13 @@ function getControlItems(nodes: NodeListOf<Element>) {
     nodes.values().map((node) => {
       const positionY = node.getBoundingClientRect().top + window.scrollY;
       const level = getControlLevel(node.localName);
+      const label = node.textContent;
       const href = `#${node.id}`;
       return {
         positionY,
         level,
         href,
+        label,
         id: node.id,
       };
     }),
