@@ -1,0 +1,156 @@
+import Video from '@/components/Video';
+
+export const metadata = {
+  title: "포트폴리오 개발기 - (1) 랜딩페이지 개발 및 렌더링 최적화",
+  description: "랜딩 페이지에 3D 컨텐츠를 렌더링하면서 발생한 이슈와 해결책을 정리했습니다.",
+  date: "2025-12-17",
+  author: "CLAVISHADE",
+  tags: ["Next.js", "Three.js", "React", "reflow"],
+  published: true,
+  thumbnail: '/blog/portfolio-dev-1/thumbnail.webp',
+};
+
+## 개요
+
+랜딩 페이지에는 Three.js로 렌더링된 피아노와 간단한 포트폴리오가 포함되어 있다.
+문제가 하나 있는데, 스크롤을 할 때마다 프레임 드랍이 종종 일어난다.
+
+<Video src="/blog/portfolio-dev-1/render-bottleneck.webm" />
+
+렌더링에 영향을 미칠 만한 요소를 분석해본 결과 크게 두 가지 요인을 생각해볼 수 있었다.
+1. 3D 피아노 canvas가 렌더링 병목에 영향을 준다
+2. 스크롤 시 어딘가에서 무거운 연산이 발생하고 있고, 렌더링 성능에 영향을 준다
+
+---
+
+## 원인 분석 - (1)
+
+구체적인 원인 분석을 위해 Chrome 개발자 도구의 Performance 탭을 이용했다.
+
+![perf-1](/blog/portfolio-dev-1/chrome-perf1.webp)
+
+녹화된 Performance 데이터를 분석해본 결과, 메인 스레드에서 가장 많은 실행 비율을 차지한 것은 `requestAnimationFrame` 의 호출이었다.
+랜딩페이지 코드 자체에는 `requestAnimationFrame` 을 호출하는 부분이 없기 때문에, 외부 종속성인 Three.js나 react-three가 캔버스 크기 계산 및
+프레임 계산을 위해 이를 호출한다는 점을 짐작할 수 있었다.
+
+![perf-2](/blog/portfolio-dev-1/chrome-perf2.webp)
+![perf-3](/blog/portfolio-dev-1/chrome-perf3.webp)
+
+실제로 그래프를 들여다본 결과, 거의 매 프레임마다 보이는 저 노란색 바들 중 가장 큰 너비를 차지하는 부분이
+@react-three/fiber에서 프레임 계산을 위해 `loop`함수를 호출하는 시간을 의미했다.
+
+## 해결 방법
+
+@react-three/fiber의 공식 문서에서는 mesh 등의 내부 컴포넌트 트리의 prop change시에만 frame을 계산하도록 하는 옵션을 제공한다고 언급하고 있다.
+> All you need to do is set the canvas frameloop prop to demand. It will render frames whenever it detects prop changes throughout the component tree.
+> ```tsx
+> <Canvas frameloop="demand"></Canvas>
+> ```
+> [Source](https://r3f.docs.pmnd.rs/advanced/scaling-performance)
+
+Canvas로 전달하는 `frameloop`옵션을 "demand"로 주면 되는데, 문제는 내가 피아노를 눌렀을 때 카메라 각도를 조정하는 기능을 개발할 때
+부드러운 화면 전환을 위해 prop 변경이 아닌 camera ref를 통해 직접 객체를 조정하는 식으로 개발했다는 것이다.
+
+### 카메라 이동 코드
+
+```tsx
+const animateCamera = (targetPosition: Vector3, targetLookAt: Vector3) => {
+  if (!cameraRef.current) return;
+
+  const camera = cameraRef.current;
+  const lerpFactor = 0.05;
+
+  const animate = () => {
+    const posDistance = camera.position.distanceTo(targetPosition);
+    const lookAtDistance = currentLookAtRef.current.distanceTo(targetLookAt);
+
+    if (posDistance < 0.01 && lookAtDistance < 0.01) {
+      camera.position.copy(targetPosition);
+      currentLookAtRef.current.copy(targetLookAt);
+      camera.lookAt(currentLookAtRef.current);
+      setIsAnimating(false);
+      animationFrameRef.current = null;
+      return;
+    }
+
+    camera.position.lerp(targetPosition, lerpFactor);
+    currentLookAtRef.current.lerp(targetLookAt, lerpFactor);
+    camera.lookAt(currentLookAtRef.current);
+
+    animationFrameRef.current = requestAnimationFrame(animate);
+  };
+
+  if (animationFrameRef.current !== null) {
+    cancelAnimationFrame(animationFrameRef.current);
+  }
+
+  setIsAnimating(true);
+  animationFrameRef.current = requestAnimationFrame(animate);
+};
+```
+
+공식 문서에서는 `useThree()`의 리턴값인 `invalidate()` 함수를 이용하면 frameloop이 demand일 때 다음 프레임을 그리도록 강제할 수 있다고 언급한다.
+쉽게말해 invalidate()는 다음 프레임을 요청하는 함수와 비슷하게 동작한다고 할 수 있다.
+
+하지만 이 방식은 오히려 복잡성만 높아지는 느낌이다. 프레임 콜백 내부에서 다음 프레임을 렌더링할지 결정하는 것보다 외부에서 프레임 업데이트를 할지 말지 정하는 것이
+복잡성 면에서 훨씬 더 유리하다는 생각이 들었다.
+
+## 해결 방법
+
+공식 문서대로 위의 카메라 이동 코드에 `invalidate()`를 일일이 추가하는 대신, 3D Scene 외부에서 해당 Scene이 보이는지 여부를 체크하여
+루프 정책(Canvas의 frameloop prop)을 변경하는 방식으로 해결할 수 있었다.
+
+### IntersectionObserver를 이용한 루프 정책 변경
+
+1. 3D Scene이 포함된 섹션과 동일한 크기의 div를 함께 렌더링한다.
+2. IntersectionObserver을 이용하여 1에서 생성한 div가 화면상에서 Intersecting하지 않는 경우 Canvas에 전달되는
+frameloop 값을 'never'로 바꾸어 프레임 업데이트를 막는다.
+
+결과 코드의 일부는 아래와 같다.
+
+```tsx
+function HeroContent() {
+  const { isPianoFocused, unfocusPiano } = useHero();
+  const { targetRef: observerTargetRef, isIntersecting } =
+    useIntersectionObserver({ rootMargin: '100px' });
+
+  const handleBackClick = () => {
+    unfocusPiano();
+  };
+
+  return (
+    <main className="...">
+      {!isPianoFocused && <HeroTextSection />}
+
+      <Scene frameloop={isIntersecting ? 'always' : 'never'} />
+      <div ref={observerTargetRef} className="..." />
+
+      ...
+    </main>
+  );
+}
+```
+
+## 성능 측정 (전후 방식 비교)
+
+최적화 전후를 조금 더 명확하게 비교하기 위해, Performance 탭에서 CPU에 4x slowdown을 걸고 전후 성능을 비교하였다.
+
+
+![perf-before](/blog/portfolio-dev-1/perf-4x-before.webp)
+![perf-after](/blog/portfolio-dev-1/perf-4x-after.webp)
+
+<div className="flex justify-center">
+  사진 순서대로 성능 개선 전, 후
+</div>
+
+![perf-after](/blog/portfolio-dev-1/frame-before.webp)
+![perf-after](/blog/portfolio-dev-1/frame-after.webp)
+
+<div className="flex justify-center">
+  성능 개선 전 후 프레임 비교
+</div>
+
+성능 개선 전에는 GPU 사용량과 메인 스레드의 전 구간에서 매우 높고, 지연된 프레임이 매우 많음을 알 수 있다.
+반면 성능 개선 후에는 Hero Section에서 피아노를 렌더링하지 않는 구간에서 메인 스레드와 GPU 작업량이 현저히 줄었고,
+지연된 프레임의 수도 Hero Section을 제외한 구간에서 매우 적음을 알 수 있다.
+
