@@ -53,12 +53,12 @@ export default function Navigation({
               <NavigationMenuList>
                 {items.map((item) => (
                   <NavigationMenuItem key={`navigation-item-${item.href}`}>
-                    <a
+                    <Link
                       href={item.href}
                       className="px-4 py-2 relative inline-block transition-colors duration-300 hover:text-sandy-brown after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-sandy-brown after:transition-all after:duration-300 hover:after:w-full"
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   </NavigationMenuItem>
                 ))}
               </NavigationMenuList>
@@ -80,14 +80,14 @@ export default function Navigation({
                 <div className="flex flex-col gap-8 pt-8">
                   <div className="flex flex-col gap-2">
                     {items.map((item) => (
-                      <a
+                      <Link
                         key={`mobile-nav-${item.href}`}
                         href={item.href}
                         className="text-base font-roboto  hover:text-sandy-brown hover:bg-white/5 transition-all py-3 px-6 rounded-lg"
                         onClick={() => setOpen(false)}
                       >
                         {item.label}
-                      </a>
+                      </Link>
                     ))}
                     {sheetChild}
                   </div>
