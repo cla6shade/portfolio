@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import ContentVerticalPad from '@/components/container/ContentVerticalPad';
 import PostControllerTrack from '@/features/blog/controller/PostControllerTrack';
 import PostController from '@/features/blog/controller/PostController';
+import Image from 'next/image';
 
 export async function generateStaticParams() {
   const posts = await getAllBlogPosts();
@@ -62,7 +63,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     return <></>;
   }
   const { default: Post, metadata } = mdx;
-  const { title, description, date, author, tags, thumbnail } = metadata as BlogMetadata;
+  const { title, description, date, author, tags } = metadata as BlogMetadata;
 
   const formattedDate = new Date(date).toLocaleDateString('ko-KR', {
     year: 'numeric',
