@@ -7,7 +7,14 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from '@/components/ui/navigation-menu';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
@@ -77,6 +84,12 @@ export default function Navigation({
                 </button>
               </SheetTrigger>
               <SheetContent className="bg-background border-l border-white/10 w-[280px] pt-4">
+                <div className="hidden">
+                  <SheetHeader>
+                    <SheetTitle>Navigation Sheet</SheetTitle>
+                    <SheetDescription>Welcome to my Blog!</SheetDescription>
+                  </SheetHeader>
+                </div>
                 <div className="flex flex-col gap-8 pt-8">
                   <div className="flex flex-col gap-2">
                     {items.map((item) => (
