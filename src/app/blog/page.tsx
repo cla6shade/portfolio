@@ -5,6 +5,7 @@ import RecentPostsSection from '@/features/blog/sections/RecentPostsSection';
 import AllPostsSection from '@/features/blog/sections/AllPostsSection';
 import ProfileInfoSection from '@/features/blog/sections/ProfileInfoSection';
 import fetchUserInfo from '@/features/landing/utils/fetch-user-info';
+import BlogClientLayout from '@/features/blog/BlogClientLayout';
 
 export const metadata: Metadata = {
   title: 'CLAVIS.LOG - 개발 기록과 자아성찰',
