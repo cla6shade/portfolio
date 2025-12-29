@@ -7,7 +7,6 @@ import { Badge } from '@/components/ui/badge';
 import ContentVerticalPad from '@/components/container/ContentVerticalPad';
 import PostControllerTrack from '@/features/blog/controller/PostControllerTrack';
 import PostController from '@/features/blog/controller/PostController';
-import Image from 'next/image';
 
 export async function generateStaticParams() {
   const posts = await getAllBlogPosts();
