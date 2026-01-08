@@ -35,6 +35,9 @@ interface GitHubUserInfo {
 
 export default async function fetchUserInfo(userName?: string): Promise<GitHubUserInfo> {
   const res = await fetch(`https://api.github.com/users/${userName ?? 'cla6shade'}`);
-  const userInfo = (await res.json()) as GitHubUserInfo;
-  return userInfo;
+  return (await res.json()) as GitHubUserInfo;
+}
+
+export async function fetchFollowers(userName?: string): Promise<number> {
+  return (await fetchUserInfo(userName)).followers;
 }

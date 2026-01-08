@@ -4,7 +4,7 @@ import BasicInfoSection from '@/features/landing/basic-info/BasicInfoSection';
 import ProjectsSection from '@/features/landing/projects/ProjectsSection';
 import Footer from '@/components/Footer';
 import LandingPage from '@/features/landing/LandingPage';
-import fetchFollowers from '@/features/landing/utils/fetch-followers';
+import { fetchFollowers } from '@/features/landing/utils/fetch-user-info';
 import LandingNavigation from '@/features/landing/LandingNavigation';
 import { ThemeProvider } from 'next-themes';
 
