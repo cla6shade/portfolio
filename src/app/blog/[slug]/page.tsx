@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import ContentVerticalPad from '@/components/container/ContentVerticalPad';
 import PostControllerTrack from '@/features/blog/controller/PostControllerTrack';
 import PostController from '@/features/blog/controller/PostController';
+import CommentSection from '@/features/blog/sections/CommentSection';
 
 export async function generateStaticParams() {
   const posts = await getAllBlogPosts();
@@ -111,6 +112,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <article>
           <Post />
         </article>
+
+        <section>
+          <hr />
+          <CommentSection />
+        </section>
       </ContentVerticalPad>
       <ContentVerticalPad>
         <PostControllerTrack>
