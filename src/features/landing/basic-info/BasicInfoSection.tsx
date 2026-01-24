@@ -2,7 +2,7 @@
 
 import DefaultPad from '@/components/container/DefaultPad';
 import Flex from '@/components/container/Flex';
-import { Briefcase, Users, Award, GraduationCap, Code } from 'lucide-react';
+import { Briefcase, Users, Award, GraduationCap, Code, Mail } from 'lucide-react';
 import Image from 'next/image';
 import InfoSection from '@/features/landing/basic-info/InfoSection';
 import InfoItem from '@/features/landing/basic-info/InfoItem';
@@ -42,11 +42,22 @@ export default function BasicInfoSection() {
               <h2 className="text-4xl xl:text-5xl 2xl:text-6xl heading-gradient font-bold mb-4">
                 BASIC INFO
               </h2>
-              <Flex className="gap-2">
-                <GraduationCap className="text-sandy-brown" size={24} />
-                <p className="text-base tablet:text-lg desktop:text-xl text-gray-400">
-                  부산대학교 졸업 예정 (2026.02)
-                </p>
+              <Flex direction="col" className="gap-2">
+                <Flex className="gap-2">
+                  <GraduationCap className="text-sandy-brown" size={24} />
+                  <p className="text-base tablet:text-lg desktop:text-xl text-gray-400">
+                    부산대학교 졸업 예정 (2026.02)
+                  </p>
+                </Flex>
+                <Flex className="gap-2">
+                  <Mail className="text-sandy-brown" size={24} />
+                  <a
+                    href="mailto:cla6shade@gmail.com"
+                    className="text-base tablet:text-lg desktop:text-xl text-gray-400"
+                  >
+                    cla6shade@gmail.com
+                  </a>
+                </Flex>
               </Flex>
             </Flex>
           </Flex>
@@ -161,8 +172,8 @@ export default function BasicInfoSection() {
                 className="group-hover:text-peach"
               />
               <InfoItem
-                content="APPTIVE 프론트엔드 멘토"
-                description="부산대학교 교내 동아리"
+                content="IT 서비스 개발 동아리 APPTIVE 프론트엔드 멘토"
+                description="2023.09 - 2025.09"
                 className="group-hover:text-peach"
               />
             </InfoSection>
