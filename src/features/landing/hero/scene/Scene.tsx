@@ -6,6 +6,7 @@ import StageLight from '@/features/landing/hero/scene/StageLight';
 import Chair from '@/features/landing/hero/scene/Chair';
 import { useHero } from '@/features/landing/hero/HeroProvider';
 import Piano from '@/features/landing/hero/piano/Piano';
+import ClickMeText from '@/features/landing/hero/scene/ClickMeText';
 import Flex from '@/components/container/Flex';
 
 import { useRef } from 'react';
@@ -55,6 +56,7 @@ export default function Scene({ frameloop }: { frameloop: Frameloop }) {
           <Chair position={[boxX, boxY, boxZ]} rotation={PIANO_ROTATION} />
           <group onClick={handleGroupClick}>
             <Piano isSoundEnabled={isSoundEnabled} />
+            <ClickMeText />
           </group>
         </Canvas>
       </div>
