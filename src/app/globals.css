@@ -57,12 +57,12 @@
   --animate-bounce: bounce 2s ease-in-out infinite;
   --animate-fade-in-slide: fade-in-slide 1s ease-out forwards;
 
-
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1024px;
   --breakpoint-lg-desktop: 1440px;
 
 }
+
 
 :root {
   --radius: 0.625rem;
@@ -157,6 +157,9 @@
 
 .heading-gradient {
   @apply text-transparent bg-gradient-to-r from-peru via-sandy-brown to-peach-puff bg-clip-text;
+}
+.heading-gradient-light {
+  @apply text-transparent bg-gradient-to-r from-light-peru via-peach-puff to-cream bg-clip-text;
 }
 .bg-gradient {
   @apply bg-gradient-to-r from-peru to-light-peru;

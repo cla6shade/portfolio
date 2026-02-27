@@ -43,13 +43,13 @@ export default function BasicInfoSection() {
                 BASIC INFO
               </h2>
               <Flex direction="col" className="gap-2">
-                <Flex className="gap-2">
+                <Flex className="gap-2" align="center">
                   <GraduationCap className="text-sandy-brown" size={24} />
                   <p className="text-base tablet:text-lg desktop:text-xl text-gray-400">
-                    부산대학교 졸업 예정 (2026.02)
+                    부산대학교 졸업 (2026.02)
                   </p>
                 </Flex>
-                <Flex className="gap-2">
+                <Flex className="gap-2" align="center">
                   <Mail className="text-sandy-brown" size={24} />
                   <a
                     href="mailto:cla6shade@gmail.com"
@@ -72,9 +72,15 @@ export default function BasicInfoSection() {
               )}
             >
               <InfoItem
-                content="한국해양과학기술원"
-                description="2025.01 - 2025.02, 2025.07 - 2025.08"
+                content="오너소프트 대표"
+                description="2026.01 ~"
                 className="group-hover:text-light-peru"
+                details={[
+                  '공공기관 프로젝트 수행 중 (한국해양과학기술원·해군)',
+                  '비정형격자 기반 수치모델 시각화 시스템 개발',
+                  '해양과학기지 웹 플랫폼 개발',
+                ]}
+                highlight
               />
               <InfoItem
                 content="외주 개발"

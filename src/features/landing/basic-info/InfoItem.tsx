@@ -5,11 +5,13 @@ import Flex from '@/components/container/Flex';
 interface InfoItemProps {
   content: string;
   description: string;
+  details?: string[];
+  highlight?: boolean;
   className?: string;
   icon?: string;
 }
 
-export default function InfoItem({ content, description, className, icon }: InfoItemProps) {
+export default function InfoItem({ content, description, details, highlight, className, icon }: InfoItemProps) {
   return (
     <div className="group">
       <Flex align="center" className="gap-3">
@@ -26,12 +28,22 @@ export default function InfoItem({ content, description, className, icon }: Info
           <p
             className={cn(
               'text-base tablet:text-lg font-medium text-white transition-colors',
+              highlight && 'heading-gradient-light',
               className,
             )}
           >
             {content}
           </p>
           <p className="text-sm tablet:text-base text-gray-400 mt-1">{description}</p>
+          {details && details.length > 0 && (
+            <ul className="mt-1">
+              {details.map((detail, index) => (
+                <li key={`detail-${index}`} className="text-sm tablet:text-base text-gray-500">
+                  {detail}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </Flex>
     </div>
